@@ -7,9 +7,13 @@ body {
 }
 
 p.navbar-text.pull-right {
+
     margin-right: 15px;
 }
 
+p.pull-right{
+    float: right!important;
+}
 p.navbar-text.pull-left {
     margin-left: 15px;
 }
