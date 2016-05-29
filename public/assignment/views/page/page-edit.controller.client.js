@@ -23,7 +23,6 @@
         function updatePage(pageId,page){
             var result = PageService.updatePage(vm.pageId,page);
             if(result === true){
-                vm.success = "Profile Updated Successfully";
                 $location.url("/user/"+vm.userId+"/website/"+vm.webSiteId+"/page");
             }else{
                 vm.error ="Error while processing";

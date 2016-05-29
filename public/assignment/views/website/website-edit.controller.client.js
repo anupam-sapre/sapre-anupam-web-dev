@@ -27,7 +27,6 @@
         function updateWebsite(websiteId,webSite){
             var result = WebsiteService.updateWebsite(vm.websiteId,webSite);
             if(result === true){
-                vm.success = "Profile Updated Successfully";
                 $location.url("/user/"+vm.userId+"/website");
             }else{
                 vm.error ="Error while processing";
