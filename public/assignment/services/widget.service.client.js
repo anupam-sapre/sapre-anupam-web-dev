@@ -24,7 +24,7 @@
             deleteWidget: deleteWidget
         };
         return api;
-        
+
         function findWidgetsByPageId(pageId) {
             var resultSet = [];
             for(var i in widgets) {
@@ -45,7 +45,7 @@
             widgets.push(newWidget);
             return newWidget;
         }
-        
+
         function findWidgetById(widgetId) {
             for(var i in widgets){
                 if(widgets[i]._id === widgetId){
@@ -54,7 +54,7 @@
             }
             return null;
         }
-        
+
         function updateWidget(widgetId,widget) {
             for(var i in widgets) {
                 if(widgets[i]._id === widgetId) {
@@ -70,7 +70,7 @@
             }
             return false;
         }
-        
+
         function deleteWidget(widgetId) {
             for(var i in widgets) {
                 if(widgets[i]._id === widgetId) {

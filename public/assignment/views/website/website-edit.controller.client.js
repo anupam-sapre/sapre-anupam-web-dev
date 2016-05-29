@@ -23,7 +23,7 @@
             vm.webSite = angular.copy(WebsiteService.findWebsiteById(vm.websiteId));
         }
         init();
-        
+
         function updateWebsite(websiteId,webSite){
             var result = WebsiteService.updateWebsite(vm.websiteId,webSite);
             if(result === true){

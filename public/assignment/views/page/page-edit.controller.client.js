@@ -13,8 +13,7 @@
         vm.pageId = $routeParams.pageId;
         vm.updatePage = updatePage;
         vm.deletePage = deletePage;
-
-
+        
         function init() {
             vm.page = angular.copy(PageService.findPageById(vm.pageId));
         }

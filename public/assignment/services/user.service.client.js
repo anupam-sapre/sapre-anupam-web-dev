@@ -32,6 +32,7 @@
             users.push(newUser);
             return newUser;
         }
+
         function deleteUser(userId) {
             for(var i in users) {
                 if(users[i]._id === userId) {
@@ -41,6 +42,7 @@
             }
             return false;
         }
+        
         function updateUser(id, newUser) {
             for(var i in users) {
                 if(users[i]._id === id) {
