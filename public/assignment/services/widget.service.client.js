@@ -17,7 +17,7 @@
 
     function WidgetService() {
         var api = {
-            findWidgetsForPageId: findWidgetsForPageId,
+            findWidgetsByPageId: findWidgetsByPageId,
             createWidget: createWidget,
             findWidgetById: findWidgetById,
             updateWidget: updateWidget,
@@ -25,7 +25,7 @@
         };
         return api;
         
-        function findWidgetsForPageId(pageId) {
+        function findWidgetsByPageId(pageId) {
             var resultSet = [];
             for(var i in widgets) {
                 if(widgets[i].pageId === pageId) {

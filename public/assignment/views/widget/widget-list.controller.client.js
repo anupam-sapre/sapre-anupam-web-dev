@@ -12,7 +12,7 @@
         vm.getSafeUrl = getSafeUrl;
 
         function init() {
-            vm.widgets = angular.copy(WidgetService.findWidgetsForPageId(vm.pageId));
+            vm.widgets = angular.copy(WidgetService.findWidgetsByPageId(vm.pageId));
         }
         init();
 

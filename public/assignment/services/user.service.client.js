@@ -46,6 +46,7 @@
                 if(users[i]._id === id) {
                     users[i].firstName = newUser.firstName;
                     users[i].lastName = newUser.lastName;
+                    users[i].email = newUser.email;
                     return true;
                 }
             }
