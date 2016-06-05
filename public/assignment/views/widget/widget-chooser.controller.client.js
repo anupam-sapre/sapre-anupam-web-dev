@@ -18,12 +18,16 @@
                 widgetType:widgetType,
                 text:""
             };
-            var newWidget = WidgetService.createWidget(vm.pageId,newWidg);
-            if(newWidget) {
-                $location.url("/user/"+vm.userId+"/website/"+vm.webSiteId+"/page/"+vm.pageId+"/widget/"+newWidget._id);
-            } else {
-                vm.error = "Unable to create widget";
-            }
+             WidgetService
+                .createWidget(vm.pageId, newWidg)
+                .then(function(response){
+                    var newWidget = response.data;
+                    if(newWidget._id) {
+                        $location.url("/user/"+vm.userId+"/website/"+vm.webSiteId+"/page/"+vm.pageId+"/widget/"+newWidget._id);
+                    } else {
+                        vm.error = "Unable to create widget";
+                    }
+                });
         }
     }
 
