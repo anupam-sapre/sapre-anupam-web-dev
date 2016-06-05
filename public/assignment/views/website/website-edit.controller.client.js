@@ -11,26 +11,38 @@
         vm.updateWebsite = updateWebsite;
 
         function deleteWebsite(websiteId) {
-            var result = WebsiteService.deleteWebsite(websiteId);
-            if(result) {
-                $location.url("/user/"+vm.userId+"/website");
-            } else {
-                vm.error = "Unable to delete website";
-            }
+            WebsiteService
+                .deleteWebsite(websiteId)
+                .then(
+                    function(){
+                        $location.url("/user/"+vm.userId+"/website");
+                    },
+                    function() {
+                        vm.error = "Unable to delete website";
+                    }
+                );
         }
 
         function init() {
-            vm.webSite = angular.copy(WebsiteService.findWebsiteById(vm.websiteId));
+            WebsiteService
+                .findWebsiteById(vm.websiteId)
+                .then(function(response){
+                    vm.webSite = response.data;
+                });
         }
         init();
 
         function updateWebsite(websiteId,webSite){
-            var result = WebsiteService.updateWebsite(vm.websiteId,webSite);
-            if(result === true){
-                $location.url("/user/"+vm.userId+"/website");
-            }else{
-                vm.error ="Error while processing";
-            }
+            WebsiteService
+                .updateWebsite(vm.websiteId,webSite)
+                .then(
+                    function () {
+                        $location.url("/user/"+vm.userId+"/website");
+                    },
+                    function () {
+                        vm.error ="Error while processing";
+                    }
+                );
         }
 
     }

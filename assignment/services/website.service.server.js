@@ -21,6 +21,7 @@ module.exports = function(app) {
         websites.push(newWebsite);
         res.send(newWebsite);
     }
+
     function findAllWebsitesForUser(req, res){
         var userId = req.params.userId;
         var result = [];
@@ -32,12 +33,37 @@ module.exports = function(app) {
         res.json(result);
     }
     function findWebsiteById(req, res){
-
+        var websiteId = req.params.websiteId;
+        for(var i in websites){
+            if(websites[i]._id === websiteId){
+                res.send(websites[i]);
+                return;
+            }
+        }
+        res.send({});
     }
     function updateWebsite(req, res){
-
+        var websiteId = req.params.websiteId;
+        var webSite = req.body;
+        for(var i in websites) {
+            if(websites[i]._id === websiteId) {
+                websites[i].name = webSite.name;
+                websites[i].description = webSite.description;
+                res.send(200);
+                return;
+            }
+        }
+        res.send(400);
     }
     function deleteWebsite(req, res){
-
+        var websiteId = req.params.websiteId;
+        for(var i in websites) {
+            if(websites[i]._id === websiteId) {
+                websites.splice(i, 1);
+                res.send(200);
+                return;
+            }
+        }
+        res.send(400);
     }
 };
