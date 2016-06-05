@@ -15,26 +15,38 @@
         vm.deletePage = deletePage;
         
         function init() {
-            vm.page = angular.copy(PageService.findPageById(vm.pageId));
+            PageService
+                .findPageById(vm.pageId)
+                .then(function(response){
+                    vm.page = response.data;
+                });
         }
         init();
 
         function updatePage(pageId,page){
-            var result = PageService.updatePage(vm.pageId,page);
-            if(result === true){
-                $location.url("/user/"+vm.userId+"/website/"+vm.webSiteId+"/page");
-            }else{
-                vm.error ="Error while processing";
-            }
+            PageService
+                .updatePage(vm.pageId,page)
+                .then(
+                    function () {
+                        $location.url("/user/"+vm.userId+"/website/"+vm.webSiteId+"/page");
+                    },
+                    function () {
+                        vm.error ="Error while processing";
+                    }
+                );
         }
 
         function deletePage(websiteId) {
-            var result = PageService.deletePage(websiteId);
-            if(result) {
-                $location.url("/user/"+vm.userId+"/website/"+vm.webSiteId+"/page");
-            } else {
-                vm.error = "Unable to delete website";
-            }
+            PageService
+                .deletePage(websiteId)
+                .then(
+                    function(){
+                        $location.url("/user/"+vm.userId+"/website/"+vm.webSiteId+"/page");
+                    },
+                    function() {
+                        vm.error = "Unable to delete Page";
+                    }
+                );
         }
     }
 })();
