@@ -12,19 +12,14 @@
 
         function register(username,password,verifyPassword) {
             if(password === verifyPassword){
-                var result = UserService.findUserByUsername(username);
-                if(result == false){
-                    var newUser = UserService.createUser(username,password);
-                    if(newUser) {
-                        $location.url("/user/"+newUser._id);
-                    }
-                    else{
-                        vm.error = "Unable to create User";
-                    }
-                }
-                else{
-                    vm.error ="Username is already taken. Please try different Username";
-                }
+                UserService
+                    .createUser(username, password)
+                    .then(function(response){
+                        var user = response.data;
+                        if(user) {
+                            $location.url("/user/"+user._id);
+                        }
+                    });
             }
             else{
                 vm.error = "Both typed passwords should match";

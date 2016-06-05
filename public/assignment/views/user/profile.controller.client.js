@@ -7,24 +7,46 @@
         .controller("ProfileController", ProfileController);
 
 
-    function ProfileController($routeParams,UserService) {
+    function ProfileController($routeParams,UserService,$location) {
         var vm =this;
         vm.updateUser = updateUser;
+        vm.unRegister = unregister;
         var index=-1;
         var id = $routeParams["uid"];
 
         function init() {
-            vm.user = angular.copy(UserService.findUserById(id));
+            UserService
+                .findUserById(id)
+                .then(function(response){
+                    vm.user = response.data;
+                });
         }
         init();
 
         function updateUser(newUser) {
-            var result = UserService.updateUser(id, newUser);
-            if(result === true){
-                vm.success = "Profile Updated Successfully";
-            }else{
-                vm.error ="Error while processing";
-            }
+            UserService
+                .updateUser(id, newUser)
+                .then(
+                    function(response) {
+                        vm.success = "Updated successfully";
+                    },
+                    function(error) {
+                        vm.error = "Unable to update user"
+                    }
+                );
+        }
+
+        function unregister() {
+            UserService
+                .deleteUser(id)
+                .then(
+                    function(){
+                        $location.url("/login");
+                    },
+                    function() {
+                        vm.error = "Unable to remove user"
+                    }
+                );
         }
     }
 })();
