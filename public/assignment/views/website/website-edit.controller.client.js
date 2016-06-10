@@ -34,7 +34,7 @@
 
         function updateWebsite(websiteId,webSite){
             WebsiteService
-                .updateWebsite(vm.websiteId,webSite)
+                .updateWebsite(websiteId,webSite)
                 .then(
                     function () {
                         $location.url("/user/"+vm.userId+"/website");
