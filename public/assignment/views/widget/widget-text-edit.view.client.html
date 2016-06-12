@@ -1,5 +1,3 @@
-
-
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
@@ -11,10 +9,10 @@
             </p>
             <a class="navbar-brand"
                href="#/user/{{model.userId}}/website/{{model.webSiteId}}/page/{{model.pageId}}/widget/{{model.widgetId}}">
-                Widget Edit
+                Text Widget
             </a>
             <p class="navbar-text pull-right">
-                <a  ng-click="model.updateWidget(model.widgetId,model.widget)" class="navbar-link">
+                <a ng-click="model.updateWidget(model.widgetId,model.widget)" class="navbar-link">
                   <span class="glyphicon glyphicon-ok">
                   </span>
                 </a>
@@ -24,41 +22,15 @@
 </nav>
 
 <div class="container">
+    Text
+    <input ng-model="model.widget.text" class="form-control"/>
+    Rows
+    <input ng-model="model.widget.rows" class="form-control" type="number"/>
+    Placeholder
+    <input ng-model="model.widget.placeholder" class="form-control"/>
+    Formatted
+    <input ng-model="model.widget.formatted" type="checkbox"/>
 
-    <form>
-        <div class="form-group">
-            <label for="widget-name">Name</label>
-            <input ng-model="model.widget.name"
-                   type="text"
-                   class="form-control"
-                   id="widget-name"
-                   placeholder="Name">
-        </div>
-        <div class="form-group">
-            <label for="widget-text">Text</label>
-            <input ng-model="model.widget.text"
-                   type="text"
-                   class="form-control"
-                   id="widget-text"
-                   placeholder="Text">
-        </div>
-        <div class="form-group">
-            <label for="widget-url">URL</label>
-            <input ng-model="model.widget.url"
-                   type="text"
-                   class="form-control"
-                   id="widget-url"
-                   placeholder="https://www.youtube.com/watch?v=BPNTC7uZYrI">
-        </div>
-        <div class="form-group">
-            <label for="widget-width">Width</label>
-            <input ng-model="model.widget.width"
-                   type="text"
-                   class="form-control"
-                   id="widget-width"
-                   placeholder="90%">
-        </div>
-    </form>
     <a class="btn btn-danger  btn-block"
        ng-click="model.deleteWidget(model.widgetId)">Delete</a>
 </div>

@@ -15,7 +15,7 @@
 
         function createWidget(pageId,widgetType) {
             var newWidg = {
-                widgetType:widgetType,
+                type:widgetType,
                 text:""
             };
              WidgetService

@@ -10,15 +10,13 @@
         vm.pageId = $routeParams.pageId;
         vm.getSafeHtml = getSafeHtml;
         vm.getSafeUrl = getSafeUrl;
+        vm.sort = sort;
 
         function init() {
             WidgetService.findWidgetsByPageId(vm.pageId)
                 .then(function (response) {
                     vm.widgets  = response.data;
                 });
-            $(".container").sortable(
-                {axis: "y"}
-            );
         }
         init();
 
@@ -32,6 +30,18 @@
             var url = "https://www.youtube.com/embed/" + id;
             return $sce.trustAsResourceUrl(url);
 
+        }
+
+        function sort(start, end) {
+            WidgetService.sortWidget(vm.pageId,start, end)
+                .then(
+                    function (response) {
+                        init();
+                    },
+                    function (err) {
+                        vm.error = err;
+                    }
+                );
         }
     }
 })();
