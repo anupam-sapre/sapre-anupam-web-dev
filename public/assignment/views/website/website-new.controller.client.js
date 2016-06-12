@@ -12,7 +12,7 @@
             vm.nameError = false;
             if(!name){
                 vm.nameError = true;
-                vm.error="Name is required";
+                vm.error="Name is required ";
             }
             else {
                 var newWeb = {
