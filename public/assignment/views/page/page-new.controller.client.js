@@ -11,9 +11,11 @@
         vm.userId = $routeParams.userId;
         vm.webSiteId = $routeParams.websiteId;
         vm.createPage = createPage;
-
+        vm.nameError = false;
         function createPage(name, title) {
+            vm.nameError = false;
             if(!name){
+                vm.nameError = true;
                 vm.error="Name is required";
             }
             else {

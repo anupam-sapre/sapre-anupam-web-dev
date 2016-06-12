@@ -14,7 +14,7 @@
         vm.widgetId = $routeParams.widgetId;
         vm.updateWidget =updateWidget;
         vm.deleteWidget = deleteWidget;
-
+        vm.nameError = false;
         function init() {
             WidgetService
                 .findWidgetById(vm.widgetId)
@@ -25,7 +25,9 @@
         init();
 
         function updateWidget(widgetId,widget){
+            vm.nameError = false;
             if(!widget.name){
+                vm.nameError = true;
                 vm.error="Name is required field";
             }
             else {

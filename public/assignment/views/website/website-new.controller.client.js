@@ -7,9 +7,11 @@
         var vm = this;
         vm.userId = $routeParams.userId;
         vm.createWebsite = createWebsite;
-
+        vm.nameError = false;
         function createWebsite(name, description) {
+            vm.nameError = false;
             if(!name){
+                vm.nameError = true;
                 vm.error="Name is required";
             }
             else {

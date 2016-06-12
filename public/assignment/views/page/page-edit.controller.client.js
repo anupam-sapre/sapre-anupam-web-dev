@@ -13,7 +13,7 @@
         vm.pageId = $routeParams.pageId;
         vm.updatePage = updatePage;
         vm.deletePage = deletePage;
-        
+        vm.nameError = false;
         function init() {
             PageService
                 .findPageById(vm.pageId)
@@ -24,7 +24,9 @@
         init();
 
         function updatePage(pageId,page){
+            vm.nameError = false;
             if(!page.name){
+                vm.nameError = true;
                 vm.error="Name is required";
             }
             else {

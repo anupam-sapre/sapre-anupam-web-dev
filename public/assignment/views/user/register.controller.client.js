@@ -9,15 +9,23 @@
     function RegisterController($location,UserService) {
         var vm = this;
         vm.register = register;
-
+        vm.userError = false;
+        vm.passError = false;
+        vm.verifyError = false;
         function register(username,password,verifyPassword) {
+            vm.userError = false;
+            vm.passError = false;
+            vm.verifyError = false;
             if(!username){
                 vm.error="Username is required";
+                vm.userError = true;
             }else if(!password){
                 vm.error="Password is required";
+                vm.passError = true;
             }
             else if(!verifyPassword){
                 vm.error="Verify Password is required";
+                vm.verifyError = true;
             }
             else {
                 if (password === verifyPassword) {
@@ -31,6 +39,8 @@
                         });
                 }
                 else {
+                    vm.passError = true;
+                    vm.verifyError = true;
                     vm.error = "Both typed passwords should match";
                 }
             }

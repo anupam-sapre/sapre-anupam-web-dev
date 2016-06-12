@@ -9,6 +9,7 @@
         vm.websiteId = $routeParams.websiteId;
         vm.deleteWebsite = deleteWebsite;
         vm.updateWebsite = updateWebsite;
+        vm.nameError = false;
 
         function deleteWebsite(websiteId) {
             WebsiteService
@@ -33,8 +34,10 @@
         init();
 
         function updateWebsite(websiteId,webSite){
+            vm.nameError = false;
             if(!webSite.name){
                 vm.error="Name is required";
+                vm.nameError = true;
             }
             else {
                 WebsiteService

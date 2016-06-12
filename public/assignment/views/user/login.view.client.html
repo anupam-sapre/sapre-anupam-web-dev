@@ -5,15 +5,17 @@
         {{model.error}}
     </div>
 
-
     <h1>Login</h1>
+    <div ng-class="{'has-error':model.userError}">
     <input ng-model="username" type="text"
            class="form-control"
-           placeholder="username"/>
+           placeholder="username" name="username"/>
+    </div>
+    <div ng-class="{'has-error':model.passError}">
     <input ng-model="password" type="password"
            class="form-control"
            placeholder="password"/>
-
+    </div>
     <a ng-click="model.login(username,password)" class="btn btn-primary btn-block">Login</a>
     <a class="btn btn-success btn-block"
        href="#/register">Register</a>

@@ -28,7 +28,7 @@
         {{model.error}}
     </div>
     <form>
-        <div class="form-group">
+        <div class="form-group" ng-class="{'has-error':model.nameError}">
             <label for="widget-name">Name</label>
             <input ng-model="model.widget.name"
                    type="text"
