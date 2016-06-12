@@ -9,12 +9,11 @@
     <h1>Login</h1>
     <input ng-model="username" type="text"
            class="form-control"
-           placeholder="username" required/>
-    <span class="text-error" data-ng-show="model.invalidUser">User Name is required</span>
+           placeholder="username"/>
     <input ng-model="password" type="password"
            class="form-control"
-           placeholder="password" required/>
-    <span class="text-error" data-ng-show="model.invalidPassword">Password is required</span>
+           placeholder="password"/>
+
     <a ng-click="model.login(username,password)" class="btn btn-primary btn-block">Login</a>
     <a class="btn btn-success btn-block"
        href="#/register">Register</a>

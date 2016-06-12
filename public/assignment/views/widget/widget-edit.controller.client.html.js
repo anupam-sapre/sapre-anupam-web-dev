@@ -25,16 +25,21 @@
         init();
 
         function updateWidget(widgetId,widget){
-            WidgetService
-                .updateWidget(widgetId,widget)
-                .then(
-                    function () {
-                        $location.url("/user/"+vm.userId+"/website/"+vm.webSiteId+"/page/"+vm.pageId+"/widget");
-                    },
-                    function () {
-                        vm.error ="Error while processing";
-                    }
-                );
+            if(!widget.name){
+                vm.error="Name is required field";
+            }
+            else {
+                WidgetService
+                    .updateWidget(widgetId, widget)
+                    .then(
+                        function () {
+                            $location.url("/user/" + vm.userId + "/website/" + vm.webSiteId + "/page/" + vm.pageId + "/widget");
+                        },
+                        function () {
+                            vm.error = "Error while processing";
+                        }
+                    );
+            }
         }
 
         function deleteWidget(widgetId) {

@@ -33,16 +33,21 @@
         init();
 
         function updateWebsite(websiteId,webSite){
-            WebsiteService
-                .updateWebsite(websiteId,webSite)
-                .then(
-                    function () {
-                        $location.url("/user/"+vm.userId+"/website");
-                    },
-                    function () {
-                        vm.error ="Error while processing";
-                    }
-                );
+            if(!webSite.name){
+                vm.error="Name is required";
+            }
+            else {
+                WebsiteService
+                    .updateWebsite(websiteId, webSite)
+                    .then(
+                        function () {
+                            $location.url("/user/" + vm.userId + "/website");
+                        },
+                        function () {
+                            vm.error = "Error while processing";
+                        }
+                    );
+            }
         }
 
     }

@@ -13,20 +13,25 @@
         vm.createPage = createPage;
 
         function createPage(name, title) {
-            var newP = {
-                name:name,
-                title:title
-            };
-            PageService
-                .createPage(vm.webSiteId, newP)
-                .then(function(response){
-                    var newPage = response.data;
-                    if(newPage._id) {
-                        $location.url("/user/"+vm.userId+"/website/"+vm.webSiteId+"/page");
-                    } else {
-                        vm.error = "Unable to create website";
-                    }
-                });
+            if(!name){
+                vm.error="Name is required";
+            }
+            else {
+                var newP = {
+                    name: name,
+                    title: title
+                };
+                PageService
+                    .createPage(vm.webSiteId, newP)
+                    .then(function (response) {
+                        var newPage = response.data;
+                        if (newPage._id) {
+                            $location.url("/user/" + vm.userId + "/website/" + vm.webSiteId + "/page");
+                        } else {
+                            vm.error = "Unable to create website";
+                        }
+                    });
+            }
         }
     }
 })();

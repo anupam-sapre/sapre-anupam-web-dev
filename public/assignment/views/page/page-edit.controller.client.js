@@ -24,16 +24,21 @@
         init();
 
         function updatePage(pageId,page){
-            PageService
-                .updatePage(vm.pageId,page)
-                .then(
-                    function () {
-                        $location.url("/user/"+vm.userId+"/website/"+vm.webSiteId+"/page");
-                    },
-                    function () {
-                        vm.error ="Error while processing";
-                    }
-                );
+            if(!page.name){
+                vm.error="Name is required";
+            }
+            else {
+                PageService
+                    .updatePage(vm.pageId, page)
+                    .then(
+                        function () {
+                            $location.url("/user/" + vm.userId + "/website/" + vm.webSiteId + "/page");
+                        },
+                        function () {
+                            vm.error = "Error while processing";
+                        }
+                    );
+            }
         }
 
         function deletePage(websiteId) {

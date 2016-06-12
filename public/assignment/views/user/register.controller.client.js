@@ -11,18 +11,28 @@
         vm.register = register;
 
         function register(username,password,verifyPassword) {
-            if(password === verifyPassword){
-                UserService
-                    .createUser(username, password)
-                    .then(function(response){
-                        var user = response.data;
-                        if(user) {
-                            $location.url("/user/"+user._id);
-                        }
-                    });
+            if(!username){
+                vm.error="Username is required";
+            }else if(!password){
+                vm.error="Password is required";
             }
-            else{
-                vm.error = "Both typed passwords should match";
+            else if(!verifyPassword){
+                vm.error="Verify Password is required";
+            }
+            else {
+                if (password === verifyPassword) {
+                    UserService
+                        .createUser(username, password)
+                        .then(function (response) {
+                            var user = response.data;
+                            if (user) {
+                                $location.url("/user/" + user._id);
+                            }
+                        });
+                }
+                else {
+                    vm.error = "Both typed passwords should match";
+                }
             }
         }
     }

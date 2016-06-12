@@ -22,14 +22,27 @@
 </nav>
 
 <div class="container">
-    <div ng-model="model.widget.text"
-         text-angular
-         ta-toolbar="[['h1','h2','h3'],['bold','italics','underline','strikeThrough'],
+    <form>
+        <div ng-show="model.error" class="alert alert-danger">
+            {{model.error}}
+        </div>
+        <div class="form-group">
+            <label for="widget-name">Name</label>
+            <input ng-model="model.widget.name"
+                   type="text"
+                   class="form-control"
+                   id="widget-name"
+                   placeholder="Name">
+        </div>
+        <div ng-model="model.widget.text"
+             text-angular
+             ta-toolbar="[['h1','h2','h3'],['bold','italics','underline','strikeThrough'],
         ['ul','ol'],['justifyLeft','justifyCenter','justifyRight','justifyFull'],
         ['indent','outdent'],['html']]">
-    </div>
-    <a class="btn btn-danger  btn-block"
-       ng-click="model.deleteWidget(model.widgetId)">Delete</a>
+        </div>
+        <a class="btn btn-danger  btn-block"
+           ng-click="model.deleteWidget(model.widgetId)">Delete</a>
+    </form>
 </div>
 
 <nav class="navbar navbar-default navbar-fixed-bottom">
