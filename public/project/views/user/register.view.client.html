@@ -1,0 +1,54 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <img src="http://i.imgur.com/rjYopIU.png" class="img-responsive-logo max-height"  />
+        </div>
+        <div style="display: inline;">
+            <p class="navbar-text pull-right">
+                <a href="#/login" class="btn btn-success btn-block font-styles">
+                    Sign In
+                </a>
+            </p>
+        </div>
+    </div>
+</nav>
+<div class="container nav-top-space">
+
+    <div ng-show="model.error" class="alert alert-danger">
+        {{model.error}}
+    </div>
+
+    <h2 class="font-styles font-color">Register</h2>
+    <div ng-class="{'has-error':model.userError}">
+        <input ng-model="username" type="text"
+               class="form-control"
+               placeholder="Username"/>
+    </div>
+    <div ng-class="{'has-error':model.emailError}">
+        <input ng-model="email" type="email"
+               class="form-control"
+               placeholder="acb@gmail.com"/>
+    </div>
+    <div ng-class="{'has-error':model.accountError}">
+        <select ng-model="accountType"
+                id="accountType"
+                class="form-control">
+            <option value="Applicant">Applicant</option>
+            <option value="Employer">Employer</option>
+            </select>
+    </div>
+    <div ng-class="{'has-error':model.passError}">
+        <input ng-model="password" type="password"
+               class="form-control"
+               placeholder="Password"/>
+    </div>
+    <div ng-class="{'has-error':model.verifyError}">
+        <input ng-model="verifyPassword" type="password"
+               class="form-control"
+               placeholder="Verify password"/>
+    </div>
+    <a class="btn btn-primary btn-block font-styles"
+       ng-click="model.register(username,password,verifyPassword,email,accountType)">Register</a>
+    <a class="btn btn-danger  btn-block font-styles"
+       href="#/home">Cancel</a>
+</div>
