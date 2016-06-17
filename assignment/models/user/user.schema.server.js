@@ -11,6 +11,11 @@ module.exports = function() {
         phone: String,
         dob: Date,
         websites: [WebsiteSchema],
+        facebook: {
+            id:    String,
+            token: String,
+            displayName: String
+        },
         dateCreated: {type: Date, default: Date.now}
     }, {collection: "assignment.user"});
 

@@ -11,7 +11,10 @@
             findUserById: findUserById,
             updateUser: updateUser,
             deleteUser: deleteUser,
-            findUserByUsername: findUserByUsername
+            findUserByUsername: findUserByUsername,
+            register: register,
+            login:login,
+            logout:logout
         };
         return api;
 
@@ -47,6 +50,26 @@
         function findUserByUsername(username) {
             var url = "/api/user/" + username;
             return $http.get(url);
+        }
+        
+        function login(username,password) {
+            var user = {
+                username: username,
+                password: password
+            };
+            return $http.post("/api/login", user);
+        }
+
+        function logout() {
+            return $http.post("/api/logout");
+        }
+
+        function register(username, password) {
+            var user = {
+                username: username,
+                password: password
+            };
+            return $http.post("/api/register", user);
         }
     }
 })();

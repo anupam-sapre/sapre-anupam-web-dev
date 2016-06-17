@@ -6,7 +6,7 @@
         .module("WebAppMaker")
         .controller("LoginController",LoginController);
 
-    function LoginController($location,UserService) {
+    function LoginController($location,UserService,$rootScope) {
 
         var vm = this;
         vm.userError = false;
@@ -23,10 +23,11 @@
             }
             else {
                 UserService
-                    .findUserByCredentials(username, password)
+                    .login(username, password)
                     .then(function (response) {
                         var user = response.data;
                         if (user && user._id) {
+                            $rootScope.currentUser = user;
                             $location.url("/user/" + user._id);
                         } else {
                             vm.error = "User not found";
