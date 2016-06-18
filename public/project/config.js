@@ -19,6 +19,16 @@
                 controller: "RegisterController",
                 controllerAs: "model"
             })
+            .when("/user/:userId", {
+                templateUrl: "views/user/profile.applicant.view.client.html",
+                controller: "ProfileController",
+                controllerAs: "model"
+            })
+            .when("/user/:userId/jobsearch", {
+                templateUrl: "views/jobs/job.search.view.client.html",
+                controller: "JobSearchController",
+                controllerAs: "model"
+            })
             .otherwise({
                 redirectTo: "/home"
             });

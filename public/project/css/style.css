@@ -85,11 +85,34 @@ select.form-control {
 }
 
 .font-color{
-     color:#FF6900;
+     color:#777;
  }
 .font-styles{
     font-family: Kavoon;
 }
 .pull-right{
     float:right;
+}
+
+div ul li.formdata{
+    margin-left: 10px;
+    margin-right: 10px;
+    list-style: none;
+}
+.stick-to-left{
+    float: left!important;
+}
+.stick-to-right{
+    float: right!important;
+    margin: 15px 0px;
+    padding-right: 5px;
+}
+.navbar-brand{
+    font-weight: bold;
+}
+div ul li.pull-right{
+    margin-top: 20px;
+}
+.push-left{
+    margin-left: 10px;
 }

@@ -1,0 +1,83 @@
+<div class="container-fluid">
+    <div class="navbar-header stick-to-left">
+        <a class="navbar-brand font-color font-styles" href="#/user/{{model.user._id}}">The Job Connector</a>
+    </div>
+    <div class="stick-to-right">
+        <a href="#/home" class="font-color"><span class="glyphicon glyphicon-minus-sign font-color"></span> Sign Out</a>
+    </div>
+</div>
+<div class="containter-fluid">
+    <div ng-show="model.success" class="alert alert-success alert-dismissible" role="alert">
+        {{model.success}}
+    </div>
+    <div ng-show="model.error" class="alert alert-danger">
+        {{model.error}}
+    </div>
+    <ul class="list-inline">
+        <li class="formdata">
+            <h2 class="font-styles font-color">Profile</h2>
+        </li>
+        <li class="pull-right formdata">
+            <a ng-click="enable=!enable" ng-init="enable=true">
+                <span class="glyphicon glyphicon-edit"></span>
+            </a>
+        </li>
+        <li class="pull-right formdata">
+            <span ng-if="!enable">
+            <a ng-click="enable=!enable;model.updateUser(model.user)" class="navbar-link">
+                  <span class="glyphicon glyphicon-ok">
+                  </span>
+            </a>
+            </span>
+        </li>
+    </ul>
+    <div ng-show="model.error" class="alert alert-danger">
+        {{model.error}}
+    </div>
+
+    <form>
+        <div class="form-group row">
+            <label for="email" class="col-sm-2 form-control-label push-left">Email address</label>
+            <div class="col-sm-8">
+                <input ng-disabled="enable"
+                       ng-model="model.user.email" type="email" class="form-control" id="email" placeholder="alice@wonderland.com">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 form-control-label push-left" for="first-name">First Name</label>
+            <div class="col-sm-8">
+                <input ng-disabled="enable"
+                       ng-model="model.user.firstName" type="text" class="form-control" id="first-name" placeholder="Alice">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 form-control-label push-left" for="last-name">Last Name</label>
+            <div class="col-sm-8">
+                <input ng-disabled="enable"
+                       ng-model="model.user.lastName" type="text" class="form-control" id="last-name" placeholder="Wonderland">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 form-control-label push-left" for="gender">Gender</label>
+            <div class="col-sm-2">
+                <select ng-disabled="enable"
+                        ng-model="model.user.gender" id="gender" class="form-control">
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
+            </div>
+            <label class="col-sm-2 form-control-label " for="dob">Date of Birth</label>
+            <div class="col-sm-4">
+                <input ng-disabled="enable"
+                       ng-model="model.user.dob" type="date" class="form-control" id="dob" placeholder="01/01/2000">
+            </div>
+        </div>
+    </form>
+    <br>
+    <ul class="nav nav-pills nav-justified">
+        <li class="active"><a href="#/user/{{model.user._id}}/jobsearch">Search Jobs</a></li>
+        <li><a href="#menu1">Applied Jobs</a></li>
+        <li><a href="#menu2">My Connections</a></li>
+        <li><a href="#menu3">Add Connections</a></li>
+    </ul>
+</div>

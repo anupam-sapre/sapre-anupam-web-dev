@@ -10,6 +10,7 @@ module.exports = function() {
         accountType:String,
         phone: String,
         dob: Date,
+        gender:String,
         jobs: [JobSchema],
         connections:[String],
         dateCreated: {type: Date, default: Date.now}
