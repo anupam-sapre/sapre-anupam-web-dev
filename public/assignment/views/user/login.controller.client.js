@@ -28,7 +28,7 @@
                         var user = response.data;
                         if (user && user._id) {
                             $rootScope.currentUser = user;
-                            $location.url("/user/" + user._id);
+                            $location.url("/user");
                         } else {
                             vm.error = "User not found";
                         }

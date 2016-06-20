@@ -13,7 +13,7 @@ module.exports = function() {
     mongoose.connect(connectionString);*/
 
     var models = {
-        userModel: require("./user/user.model.server")()
+        projUserModel: require("./user/user.model.server")()
     };
     return models;
 };

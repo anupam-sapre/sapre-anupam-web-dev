@@ -1,6 +1,6 @@
 module.exports = function(app,models) {
 
-    var userModel = models.userModel;
+    var projUserModel = models.projUserModel;
 
     app.post("/proj/user", createUser);
     app.get("/proj/user", findUserByCredentials);
@@ -10,7 +10,7 @@ module.exports = function(app,models) {
     function createUser(req, res) {
         var user = req.body;
 
-        userModel
+        projUserModel
             .createUser(user)
             .then(
                 function(user) {
@@ -26,7 +26,7 @@ module.exports = function(app,models) {
     function findUserByCredentials(req, res) {
         var username = req.query['username'];
         var password = req.query['password'];
-        userModel
+        projUserModel
             .findUserByCredentials(username, password)
             .then(
                 function (user) {
@@ -42,7 +42,7 @@ module.exports = function(app,models) {
         var id = req.params.userId;
         var newUser = req.body;
 
-        userModel
+        projUserModel
             .updateUser(id, newUser)
             .then(
                 function(stats) {
@@ -58,7 +58,7 @@ module.exports = function(app,models) {
     function findUserById(req, res) {
         var id = req.params.userId;
 
-        userModel
+        projUserModel
             .findUserById(id)
             .then(
                 function(user) {

@@ -5,15 +5,33 @@
 
     function JobSearchController($routeParams,JobService) {
         var vm =this;
-        var userId = $routeParams.userId;
+        vm.userId = $routeParams.userId;
         vm.searchIndeed=searchIndeed;
-        vm.jobResult={};
 
         function searchIndeed(text){
-            var userAgent = navigator.userAgent;
-            console.log(userAgent);
-            vm.jobResult = JobService.searchIndeed(text,userAgent);
+            JobService.fetchip().then(
+                function (ipaddress) {
+                    var agent =navigator.userAgent;
+                    JobService.searchIndeed(text,agent,ipaddress.data)
+                        .then
+                        (function (res) {
+                                vm.jobResult = res.data.results;
+                                console.log(vm.jobResult);
+                            },
+                            function (err) {
+                                console.log(err);
+                            }
+                        );
+                },
+                function (err) {
+                    console.log(err);
+                }
+            );
+
+
+
         }
+
 
     }
 })();

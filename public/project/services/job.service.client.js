@@ -4,27 +4,39 @@
         .factory("JobService", JobService);
     var publisherid= '4560520322813359';
 
-    function JobService($http) {
+    function JobService($http,$q) {
         var api = {
-            searchIndeed:searchIndeed
+            searchIndeed:searchIndeed,
+            findJobDetail:findJobDetail,
+            fetchip:fetchip
         };
         return api;
 
-        function searchIndeed(input,userAgent) {
-            $http.get('https://api.ipify.org?format=json')
-                .then(
-                    function (ipaddress) {
-                        console.log(ipaddress.data);
-                        var indeedapi = 'http://api.indeed.com/ads/apisearch?publisher='+ publisherid +
-                            '&q='+ input +'&l=&format=json&sort=' +
-                            '&radius=&st=&jt=&start=&limit=&fromage=&filter=&latlong=1&co=us&chnl=' +
-                            '&userip='+ipaddress.data+'&useragent='+userAgent+'&v=2';
-                        return $http.get(indeedapi);
-                    },
-                    function (err) {
-                        return err;
-                    }
-                );
+        function fetchip() {
+            return $http.get('https://api.ipify.org?format=json');
         }
+
+        function searchIndeed(input,agent,ipaddress) {
+
+            var indeedapi = 'http://api.indeed.com/ads/apisearch?publisher='+ publisherid +
+                '&q='+ input +'&l=&format=json&sort=' +
+                '&radius=&st=&jt=&start=&limit=&fromage=&filter=&latlong=1&co=us&chnl=' +
+                '&userip='+ipaddress.data+'&useragent='+agent+'&v=2';
+            return $http.get('https://crossorigin.me/'+indeedapi);
+
+
+            /* var url = 'https://jobs.github.com/positions.json?description='+input+'&callback=JSON_CALLBACK';
+             return $http.jsonp(url);*/
+
+        }
+        function findJobDetail(jobid) {
+
+            var url = 'http://api.indeed.com/ads/apigetjobs?publisher='+publisherid+'&jobkeys='+jobid+'&v=2&format=json' ;
+            return $http.get('https://crossorigin.me/'+url);
+            /*var url = 'https://jobs.github.com/positions/'+jobid+'.json?callback=JSON_CALLBACK';
+            return $http.jsonp(url);*/
+        }
+
+
     }
 })();

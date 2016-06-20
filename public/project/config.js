@@ -29,6 +29,11 @@
                 controller: "JobSearchController",
                 controllerAs: "model"
             })
+            .when("/user/:userId/jobsearch/:jobid", {
+                templateUrl: "views/jobs/job.detail.view.client.html",
+                controller: "JobDetailController",
+                controllerAs: "model"
+            })
             .otherwise({
                 redirectTo: "/home"
             });

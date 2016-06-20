@@ -13,8 +13,14 @@
             <a class="btn btn-primary form-control btn-block">Search!</a>
         </div>
     </form>-->
+    <div ng-show="model.error" class="alert alert-danger">
+        {{model.error}}
+    </div>
     <form>
         <div class="form-group row">
+            <div class="col-sm-10">
+                <h2 class="font-styles font-color">Job Search</h2>
+            </div>
             <div class="col-sm-8">
                 <input ng-model="model.searchInput" type="text" class="form-control" id="searchInput" placeholder="Java Intern">
             </div>
@@ -23,30 +29,26 @@
             </div>
         </div>
     </form>
-
+<span id=indeed_at><a href="http://www.indeed.com/">jobs</a> by <a
+        href="http://www.indeed.com/" title="Job Search"><img
+        src="http://www.indeed.com/p/jobsearch.gif" style="border: 0;
+vertical-align: middle;" alt="Indeed job search"></a></span>
     <div class="row">
-        <div ng-if="model.jobResult!=={}">
-            <div ng-repeat="job in model.jobResult.result" class="col-xs-6">
+            <div ng-repeat="job in model.jobResult track by $index" class="col-xs-6">
                 <div>
-                    <a ng-href="#/user/{{model.userId}}/search/{{job.jobkey}}">
-                        <!--{{job.jobtitle}}-->
+                    <a ng-href="#/user/{{model.userId}}/jobsearch/{{job.jobkey}}">
+                        {{job.jobtitle}}
                     </a>
                 </div>
                 <div>
-                   <!-- {{job.company}}-->
+                   {{job.company}}
                 </div>
                 <div>
-                   <!-- {{job.city}},{{job.state}}-->
+                   {{job.city}}
                 </div>
             </div>
-        </div>
     </div>
 
 
 
-
-    <span id=indeed_at><a href="http://www.indeed.com/">jobs</a> by <a
-            href="http://www.indeed.com/" title="Job Search"><img
-            src="http://www.indeed.com/p/jobsearch.gif" style="border: 0;
-            vertical-align: middle;" alt="Indeed job search"></a></span>
 </div>
