@@ -12,6 +12,11 @@ module.exports = function() {
         dob: Date,
         gender:String,
         jobs: [JobSchema],
+        google: {
+            id:    String,
+            token: String,
+            displayName: String
+        },
         connections:[String],
         dateCreated: {type: Date, default: Date.now}
     }, {collection: "project.user"});

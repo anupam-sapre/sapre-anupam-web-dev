@@ -3,11 +3,12 @@
         .module("TheJobConnector")
         .controller("ProfileController",ProfileController);
 
-    function ProfileController($routeParams,UserService) {
+    function ProfileController($routeParams,UserService,$rootScope,$location) {
         var vm =this;
         vm.updateUser = updateUser;
         var index=-1;
-        var id = $routeParams.userId;
+        var id = $rootScope.currentUser._id;
+        vm.logout=logout;
 
         function init() {
             UserService
@@ -31,6 +32,19 @@
                         vm.error = "Unable to update user"
                     }
                 );
+        }
+        function logout() {
+            UserService.logout()
+                .then(
+                    function (response) {
+                        $rootScope.currentUser = null;
+                        $location.url("/login");
+                    }
+                    ,function () {
+                        $rootScope.currentUser = null;
+                        $location.url("/login");
+                    }
+                )
         }
     }
 

@@ -7,7 +7,12 @@
     </div>
 </div>
 <div class="container">
+    <div ng-show="model.success" class="alert alert-success alert-dismissible" role="alert">
+        {{model.success}}
+    </div>
     <div>{{model.jobDetail.jobtitle}}</div>
     <div>{{model.jobDetail.company}}</div>
     <div>{{model.jobDetail.snippet}}</div>
+
+    <div> <a ng-click="model.saveJob()" class="btn btn-primary">Save</a></div>
 </div>

@@ -22,6 +22,19 @@
                 );
         }
         init();
+
+        function saveJob() {
+            JobService
+                .saveJob(vm.jobid, vm.userId)
+                .then(
+                    function(response) {
+                        vm.success = "Saved successfully";
+                    },
+                    function(error) {
+                        vm.error = "Unable to save job"
+                    }
+                );
+        }
     }
 
 })();

@@ -9,7 +9,10 @@
             createUser: createUser,
             findUserByCredentials:findUserByCredentials,
             findUserById:findUserById,
-            updateUser:updateUser
+            updateUser:updateUser,
+            login:login,
+            logout:logout,
+            register: register
         };
         return api;
 
@@ -36,6 +39,27 @@
         function findUserById(id) {
             var url = "/proj/user/" + id;
             return $http.get(url);
+        }
+
+        function login(username,password) {
+            var user = {
+                username: username,
+                password: password
+            };
+            return $http.post("/proj/login", user);
+        }
+        function logout() {
+            return $http.post("/proj/logout");
+        }
+
+        function register(username, password,accountType,email) {
+            var user = {
+                username: username,
+                password: password,
+                accountType:accountType,
+                email:email
+            };
+            return $http.post("/proj/register", user);
         }
     }
 })();

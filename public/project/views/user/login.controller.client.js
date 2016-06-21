@@ -3,7 +3,7 @@
         .module("TheJobConnector")
         .controller("LoginController",LoginController);
 
-    function LoginController($location,UserService) {
+    function LoginController($location,UserService,$rootScope) {
 
         var vm = this;
         vm.userError = false;
@@ -19,12 +19,23 @@
                 vm.passError = true;
             }
             else {
-                UserService
+                /*UserService
                     .findUserByCredentials(username, password)
                     .then(function (response) {
                         var user = response.data;
                         if (user && user._id) {
                             $location.url("/user/" + user._id);
+                        } else {
+                            vm.error = "User not found";
+                        }
+                    });*/
+                UserService
+                    .login(username, password)
+                    .then(function (response) {
+                        var user = response.data;
+                        if (user && user._id) {
+                            $rootScope.currentUser = user;
+                            $location.url("/user");
                         } else {
                             vm.error = "User not found";
                         }

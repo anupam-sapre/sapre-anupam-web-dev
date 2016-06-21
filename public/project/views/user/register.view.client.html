@@ -40,11 +40,13 @@
     </div>
     <div ng-class="{'has-error':model.accountError}">
         <select ng-model="accountType"
+                name="accountType"
                 id="accountType"
                 class="form-control">
-            <option value="Applicant">Applicant</option>
-            <option value="Employer">Employer</option>
+            <option  value="Applicant">Applicant</option>
+            <option  value="Employer">Employer</option>
             </select>
+
     </div>
     <div ng-class="{'has-error':model.passError}">
         <input ng-model="password" type="password"
@@ -60,4 +62,5 @@
        ng-click="model.register(username,password,verifyPassword,email,accountType)">Register</a>
     <a class="btn btn-danger  btn-block font-styles"
        href="#/home">Cancel</a>
+
 </div>

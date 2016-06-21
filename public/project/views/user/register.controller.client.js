@@ -4,11 +4,16 @@
         .controller("RegisterController",RegisterController);
 
 
-    function RegisterController($routeParams,UserService,$location) {
+    function RegisterController($routeParams,UserService,$location, $rootScope) {
         var vm =this;
         vm.register = register;
-        vm.accountType = $routeParams.accountType;
+
         console.log(vm.accountType);
+
+        function init(){
+            vm.accountType = $routeParams.accountType;
+        }
+        init();
 
         function register(username,password,verifyPassword,email,accountType) {
             vm.userError = false;
@@ -36,14 +41,28 @@
             }
             else {
                 if (password === verifyPassword) {
-                    UserService
+                    /*UserService
                         .createUser(username, password,accountType,email)
                         .then(function (response) {
                             var user = response.data;
                             if (user) {
                                 $location.url("/user/" + user._id);
                             }
-                        });
+                        });*/
+                    UserService
+                        .register(username, password,accountType,email)
+                        .then(function (response) {
+                                var user = response.data;
+                                $rootScope.currentUser = user;
+                                $location.url("/user");
+                                /*
+                                 if (user) {
+                                 $location.url("/user");
+                                 }*/
+                            },
+                            function (err) {
+                                vm.error=err.data;
+                            });
                 }
                 else {
                     vm.passError = true;

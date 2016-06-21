@@ -8,7 +8,8 @@
         var api = {
             searchIndeed:searchIndeed,
             findJobDetail:findJobDetail,
-            fetchip:fetchip
+            fetchip:fetchip,
+            saveJob:saveJob
         };
         return api;
 
@@ -35,6 +36,14 @@
             return $http.get('https://crossorigin.me/'+url);
             /*var url = 'https://jobs.github.com/positions/'+jobid+'.json?callback=JSON_CALLBACK';
             return $http.jsonp(url);*/
+        }
+
+        function saveJob(jobId,userid) {
+            var job={
+                jobId:jobId,
+                userId:userId
+            }
+            $http.put('proj/job',job);
         }
 
 
