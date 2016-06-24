@@ -25,6 +25,26 @@
                 controllerAs: "model",
                 resolve: { loggedin: checkLoggedin }
             })
+            .when("/user/:userId/view", {
+                templateUrl: "views/user/profile.search.client.html",
+                controller: "ProfileSearchController",
+                controllerAs: "model"
+            })
+            .when("/user/:userId/view/:profileId", {
+                templateUrl: "views/user/profile.readonly.client.html",
+                controller: "ProfileViewOnlyController",
+                controllerAs: "model"
+            })
+            .when("/user/:userId/myconnections", {
+                templateUrl: "views/user/myconnections.view.client.html",
+                controller: "MyConnectionsController",
+                controllerAs: "model"
+            })
+            .when("/user/:userId/myjobs", {
+                templateUrl: "views/jobs/myjobs.view.client.html",
+                controller: "MyJobsController",
+                controllerAs: "model"
+            })
             .when("/user/:userId/jobsearch", {
                 templateUrl: "views/jobs/job.search.view.client.html",
                 controller: "JobSearchController",
@@ -33,6 +53,21 @@
             .when("/user/:userId/jobsearch/:jobid", {
                 templateUrl: "views/jobs/job.detail.view.client.html",
                 controller: "JobDetailController",
+                controllerAs: "model"
+            })
+            .when("/user/:userId/jobsearch/:jobid/review/new", {
+                templateUrl: "views/reviews/review.new.client.html",
+                controller: "ReviewNewController",
+                controllerAs: "model"
+            })
+            .when("/user/:userId/jobsearch/:jobid/review", {
+                templateUrl: "views/reviews/review.list.client.html",
+                controller: "ReviewListController",
+                controllerAs: "model"
+            })
+            .when("/user/:userId/jobsearch/:jobid/review/:reviewId", {
+                templateUrl: "views/reviews/review.edit.client.html",
+                controller: "ReviewEditController",
                 controllerAs: "model"
             })
             .otherwise({

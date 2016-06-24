@@ -14,5 +14,39 @@
     <div>{{model.jobDetail.company}}</div>
     <div>{{model.jobDetail.snippet}}</div>
 
-    <div> <a ng-click="model.saveJob()" class="btn btn-primary">Save</a></div>
+    <div class="row">
+        <div class="col-sm-3">
+            <a ng-click="model.applyJob()" class="btn btn-primary">
+                Apply
+            </a>
+        </div>
+        <div class="col-sm-3">
+            <a ng-href="#/user/{{model.userId}}/jobsearch/{{model.jobDetail.jobkey}}/review/new" class="btn btn-primary">
+                Write Review
+            </a>
+        </div>
+        <div class="col-sm-3">
+            <a ng-href="#/user/{{model.userId}}/jobsearch/{{model.jobDetail.jobkey}}/review" class="btn btn-primary">
+                Edit Reviews
+            </a>
+        </div>
+    </div>
+    <div class="row">
+        <div ng-repeat="review in model.reviewResult track by $index" class="col-xs-6">
+            <div>
+                <a ng-href="#/user/{{model.userId}}/view/{{review.user_id}}">
+                    {{review.username}}
+                </a>
+            </div>
+            <div>
+                {{review.title}}
+            </div>
+            <div>
+                {{review.rating}}
+            </div>
+            <div>
+                {{review.review}}
+            </div>
+        </div>
+    </div>
 </div>

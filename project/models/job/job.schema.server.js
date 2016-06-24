@@ -2,14 +2,17 @@ module.exports = function() {
     var mongoose = require("mongoose");
     var UserSchema = require("./../user/user.schema.server.js");
     var JobSchema = mongoose.Schema({
-        employer: String,
+        company: String,
         postedBy: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'ProjectUser'
         },
-        desc: String,
-        title: String,
+        jobtitle:String,
+        jobkey:String,
         type:String,
+        snippet:String,
+        city:String,
+        url:String,
         applicants: [{
             applicant :{
                 type: mongoose.Schema.Types.ObjectId,

@@ -9,12 +9,17 @@ module.exports = function(app,models) {
 
     app.post("/proj/user", createUser);
     app.get("/proj/user", findUserByCredentials);
+    app.get("/proj/user/search/:username", findAllUsersByUsername);
     app.get("/proj/user/:userId", findUserById);
     app.put("/proj/user/:userId", updateUser);
     app.post("/proj/logout", logout);
     app.post("/proj/login", passport.authenticate('localNew'), login);
     app.post ('/proj/register', register);
     app.get ('/proj/loggedin', loggedin);
+    app.post('/proj/user/job', applyJob);
+    app.put('/proj/user/conn/:userId',addConnection);
+    app.get('/proj/user/conn/:userId',findConnections);
+
 
     app.get('/auth/google',passport.authenticate('google',{ scope: ['https://www.googleapis.com/auth/plus.login'] }));
     app.get('/auth/google/callback', passport.authenticate('google', {
@@ -208,5 +213,76 @@ module.exports = function(app,models) {
     function loggedin(req, res) {
         res.send(req.isAuthenticated() ? req.user : '0');
     }
+
+
+    function applyJob(req,res) {
+        var jobs = req.body;
+        var userId = jobs.userId;
+
+        projUserModel.findUserById(userId)
+            .then(
+                function (user) {
+                    var applications = user.applications;
+                    applications.push(jobs.jobId);
+                    user.applications = applications;
+                    user.save(function () {});
+                },
+                function(err) {
+                    res.statusCode(404).send(err);
+                }
+            )
+    }
+
+    function findAllUsersByUsername(req, res) {
+        var username = req.params.username;
+        projUserModel
+            .findAllUsersByUsername(username)
+            .then(
+                function(user) {
+                    res.send(user);
+                },
+                function(error) {
+                    res.statusCode(404).send(error);
+                }
+            )
+    }
+
+    function addConnection(req,res) {
+        var userDetails = req.body;
+        var id = userDetails.userId;
+        var name = userDetails.name;
+        var profileId = userDetails.profileId;
+
+        projUserModel
+            .findUserById(id)
+            .then(
+                function (user) {
+                    var conne = user.connections;
+                    var newProfile = {
+                        user_id:profileId,
+                        name:name
+                    }
+                    conne.push(newProfile);
+                    user.connections = conne;
+                    user.save(function () {});
+                },
+                function (error) {
+                    res.statusCode(404).send(error);
+                }
+            );
+    }
     
+    function findConnections(req,res) {
+        var userId = req.params.userId;
+        projUserModel.
+            findUserById(userId)
+            .then(
+                function(user) {
+                    res.json(user.connections);
+                },
+                function(error) {
+                    res.statusCode(404).send(error);
+                }
+            )
+    }
 };

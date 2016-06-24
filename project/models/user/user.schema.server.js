@@ -8,6 +8,7 @@ module.exports = function() {
         lastName: String,
         email:String,
         accountType:String,
+        company:String,
         phone: String,
         dob: Date,
         gender:String,
@@ -17,7 +18,13 @@ module.exports = function() {
             token: String,
             displayName: String
         },
-        connections:[String],
+        applications: [{
+            application :{
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'ProjectJob'
+            }
+        }],
+        connections:[{user_id:String,name:String}],
         dateCreated: {type: Date, default: Date.now}
     }, {collection: "project.user"});
 

@@ -9,7 +9,10 @@
             searchIndeed:searchIndeed,
             findJobDetail:findJobDetail,
             fetchip:fetchip,
-            saveJob:saveJob
+            applyJob:applyJob,
+            createJob:createJob,
+            findJobByJobkey:findJobByJobkey,
+            findJobsByUserId:findJobsByUserId
         };
         return api;
 
@@ -38,12 +41,37 @@
             return $http.jsonp(url);*/
         }
 
-        function saveJob(jobId,userid) {
+        function applyJob(jobId,userid) {
             var job={
                 jobId:jobId,
-                userId:userId
+                userId:userid
             }
-            $http.put('proj/job',job);
+            $http.put('/proj/job',job);
+        }
+
+        function createJob(jobtitle,jobkey,snippet,company,date,url,type) {
+            var job={
+                type:'External',
+                jobtitle:jobtitle,
+                jobkey:jobkey,
+                snippet:snippet,
+                company:company,
+                dateCreated:date,
+                url:url,
+                type:type
+            };
+            return $http.post('/proj/job',job);
+        }
+
+        function findJobByJobkey(jobkey) {
+            var url = "/proj/job?jobkey="+jobkey;
+            return $http.get(url);
+
+        }
+
+        function findJobsByUserId(userId) {
+            var url = "/proj/job/user/"+userId;
+            return $http.get(url);
         }
 
 

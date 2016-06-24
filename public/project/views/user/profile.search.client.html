@@ -1,0 +1,33 @@
+<div class="container-fluid">
+    <div class="navbar-header stick-to-left">
+        <a class="navbar-brand font-color font-styles" href="#/user">The Job Connector</a>
+    </div>
+    <div class="stick-to-right">
+        <a href="#/home" class="font-color"><span class="glyphicon glyphicon-minus-sign font-color"></span> Sign Out</a>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="form-group row">
+        <div class="col-sm-10">
+            <h2 class="font-styles font-color">Profile Search</h2>
+        </div>
+        <div class="col-sm-8">
+            <input ng-model="model.searchname" type="text" class="form-control" id="searchInput" placeholder="John Doe">
+        </div>
+        <div class="col-sm-2">
+            <a class="btn btn-primary form-control btn-block" ng-click="model.searchProfile(model.searchname)">Search!</a>
+        </div>
+    </div>
+    <div class="row">
+        <div ng-repeat="user in model.userResult track by $index" class="col-xs-6">
+            <div>
+                <a ng-href="#/user/{{model.userId}}/view/{{user._id}}">
+                    {{user.firstName}} {{user.lastName}}
+                </a>
+            </div>
+            <div>
+                {{user.accountType}}
+            </div>
+        </div>
+    </div>
+</div>

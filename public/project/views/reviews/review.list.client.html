@@ -1,0 +1,20 @@
+<div class="container-fluid">
+    <div class="navbar-header stick-to-left">
+        <a class="navbar-brand font-color font-styles" href="#/user">The Job Connector</a>
+    </div>
+    <div class="stick-to-right">
+        <a href="#/home" class="font-color"><span class="glyphicon glyphicon-minus-sign font-color"></span> Sign Out</a>
+    </div>
+</div>
+<div class="container">
+    <ul class="list-group">
+        <li ng-repeat="review in model.reviews" class="list-group-item">
+            <a href="#/user/{{review.user_id}}/jobsearch/{{review.jobkey}}/review/{{review._id}}">
+                {{review.title}}
+            </a>
+            <a href="#/user/{{review.user_id}}/jobsearch/{{review.jobkey}}/review/{{review._id}}" class="pull-right">
+                <span class="glyphicon glyphicon-cog"></span>
+            </a>
+        </li>
+    </ul>
+</div>

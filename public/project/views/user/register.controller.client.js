@@ -12,6 +12,12 @@
 
         function init(){
             vm.accountType = $routeParams.accountType;
+            if(vm.accountType=='Applicant'){
+                vm.appli =true;
+            }
+            else if (vm.accountType=='Employer'){
+                vm.empli=true;
+            }
         }
         init();
 

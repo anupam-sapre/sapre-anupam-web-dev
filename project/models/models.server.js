@@ -13,7 +13,9 @@ module.exports = function() {
     mongoose.connect(connectionString);*/
 
     var models = {
-        projUserModel: require("./user/user.model.server")()
+        projUserModel: require("./user/user.model.server")(),
+        jobModel:require("./job/job.model.server")(),
+        reviewModel:require("./review/review.model.server")()
     };
     return models;
 };

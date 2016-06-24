@@ -39,12 +39,12 @@
                placeholder="acb@gmail.com"/>
     </div>
     <div ng-class="{'has-error':model.accountError}">
-        <select ng-model="accountType"
+        <select ng-model="model.accountType"
                 name="accountType"
                 id="accountType"
                 class="form-control">
             <option  value="Applicant">Applicant</option>
-            <option  value="Employer">Employer</option>
+            <option value="Employer">Employer</option>
             </select>
 
     </div>
@@ -59,7 +59,7 @@
                placeholder="Verify password"/>
     </div>
     <a class="btn btn-primary btn-block font-styles"
-       ng-click="model.register(username,password,verifyPassword,email,accountType)">Register</a>
+       ng-click="model.register(username,password,verifyPassword,email,model.accountType)">Register</a>
     <a class="btn btn-danger  btn-block font-styles"
        href="#/home">Cancel</a>
 

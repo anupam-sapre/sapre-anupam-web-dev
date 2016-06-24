@@ -10,7 +10,8 @@ module.exports = function() {
         updateUser:updateUser,
         findUserById:findUserById,
         findUserByUsername:findUserByUsername,
-        findUserByGoogleId:findUserByGoogleId
+        findUserByGoogleId:findUserByGoogleId,
+        findAllUsersByUsername:findAllUsersByUsername
     };
     return api;
 
@@ -29,7 +30,8 @@ module.exports = function() {
                     firstName: user.firstName,
                     lastName: user.lastName,
                     gender:user.gender,
-                    dob:user.dob
+                    dob:user.dob,
+                    company:user.company
                 }
             });
     }
@@ -39,6 +41,10 @@ module.exports = function() {
     }
     function findUserByUsername(username) {
         return User.findOne({username:username});
+    }
+
+    function findAllUsersByUsername(username) {
+        return User.find({username: new RegExp('^'+username+'$', "i")});
     }
 
     function findUserByGoogleId(googleId) {

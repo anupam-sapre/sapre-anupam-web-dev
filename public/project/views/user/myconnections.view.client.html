@@ -1,0 +1,19 @@
+<div class="container-fluid">
+    <div class="navbar-header stick-to-left">
+        <a class="navbar-brand font-color font-styles" href="#/user">The Job Connector</a>
+    </div>
+    <div class="stick-to-right">
+        <a href="#/home" class="font-color"><span class="glyphicon glyphicon-minus-sign font-color"></span> Sign Out</a>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div ng-repeat="profile in model.profileResult track by $index" class="col-xs-10">
+            <div>
+                <a ng-href="#/user/{{model.userId}}/view/{{profile.user_id}}">
+                    {{profile.name}}
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

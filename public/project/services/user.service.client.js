@@ -12,7 +12,11 @@
             updateUser:updateUser,
             login:login,
             logout:logout,
-            register: register
+            register: register,
+            applyJob:applyJob,
+            findUserByUserName:findUserByUserName,
+            addConnection:addConnection,
+            findConnections:findConnections
         };
         return api;
 
@@ -60,6 +64,32 @@
                 email:email
             };
             return $http.post("/proj/register", user);
+        }
+        function applyJob(jobId,userid) {
+            var job={
+                jobId:jobId,
+                userId:userid
+            }
+            $http.put('proj/user/job',job);
+        }
+        function findUserByUserName(searchName){
+            var url = "/proj/user/search/" + searchName;
+            return $http.get(url);
+        }
+
+        function addConnection(userId,name,profileId) {
+            var url ="/proj/user/conn/"+userId;
+            var prof ={
+                userId:userId,
+                name:name,
+                profileId:profileId
+            }
+            return $http.put(url,prof);
+        }
+
+        function findConnections(userId) {
+            var url ="/proj/user/conn/"+userId;
+            return $http.get(url);
         }
     }
 })();

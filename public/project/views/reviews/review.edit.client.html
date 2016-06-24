@@ -1,0 +1,42 @@
+<div class="container-fluid">
+    <div class="navbar-header stick-to-left">
+        <a class="navbar-brand font-color font-styles" href="#/user">The Job Connector</a>
+    </div>
+    <div class="stick-to-right">
+        <a href="#/home" class="font-color"><span class="glyphicon glyphicon-minus-sign font-color"></span> Sign Out</a>
+    </div>
+</div>
+
+<div class="container">
+    <form>
+        <div class="form-group">
+            <label for="review-title">Title</label>
+            <input ng-model="model.review.title"
+                   type="text"
+                   class="form-control"
+                   id="review-title"
+                   placeholder="Title">
+        </div>
+        <div class="form-group">
+            <label for="job-rating">Rating</label>
+            <input ng-model="model.review.rating"
+                   type="text"
+                   class="form-control"
+                   id="job-rating"
+                   placeholder="Rating">
+        </div>
+        <div class="form-group">
+            <label for="review-description">Review Details</label>
+                <textarea ng-model="model.review.review"
+                          rows="4"
+                          id="review-description"
+                          class="form-control"
+                          placeholder="Description"></textarea>
+        </div>
+    </form>
+
+    <a class="btn btn-primary  btn-block"
+       ng-click="model.updateReview(model.reviewId,model.review)">Update</a>
+    <a class="btn btn-danger  btn-block"
+       ng-click="model.deleteReview(model.reviewId)">Delete</a>
+</div>
