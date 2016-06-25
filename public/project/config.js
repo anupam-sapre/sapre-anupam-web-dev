@@ -25,6 +25,21 @@
                 controllerAs: "model",
                 resolve: { loggedin: checkLoggedin }
             })
+            .when("/user/:userId/postedJob/new", {
+                templateUrl: "views/employer/postjob.view.client.html",
+                controller: "PostJobController",
+                controllerAs: "model"
+            })
+            .when("/user/:userId/postedJob", {
+                templateUrl: "views/employer/postedjob.list.view.client.html",
+                controller: "PostedJobListController",
+                controllerAs: "model"
+            })
+            .when("/user/:userId/postedJob/:jobId/applicants", {
+                templateUrl: "views/employer/applicant.list.view.client.html",
+                controller: "ApplicantListController",
+                controllerAs: "model"
+            })
             .when("/user/:userId/view", {
                 templateUrl: "views/user/profile.search.client.html",
                 controller: "ProfileSearchController",

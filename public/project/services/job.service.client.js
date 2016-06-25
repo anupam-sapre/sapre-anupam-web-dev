@@ -12,7 +12,12 @@
             applyJob:applyJob,
             createJob:createJob,
             findJobByJobkey:findJobByJobkey,
-            findJobsByUserId:findJobsByUserId
+            findJobsByUserId:findJobsByUserId,
+            createJobInternal:createJobInternal,
+            findJobsByPostedId:findJobsByPostedId,
+            deleteJob:deleteJob,
+            deleteApplication:deleteApplication,
+            findJobDescription:findJobDescription
         };
         return api;
 
@@ -46,7 +51,7 @@
                 jobId:jobId,
                 userId:userid
             }
-            $http.put('/proj/job',job);
+            return $http.put('/proj/job',job);
         }
 
         function createJob(jobtitle,jobkey,snippet,company,date,url,type) {
@@ -74,6 +79,33 @@
             return $http.get(url);
         }
 
+        function createJobInternal(job) {
+            return $http.post('/proj/job/internal',job);
+        }
+
+        function findJobsByPostedId(userId) {
+            var url = "/proj/job/posted/"+userId;
+            return $http.get(url);
+        }
+
+        function deleteJob(jobId) {
+            var url = "/proj/job/" + jobId;
+            return $http.delete(url);
+        }
+
+        function deleteApplication(profileId,jobId) {
+            var idDetails = {
+                userId:profileId,
+                jobId:jobId
+            }
+            var url = "/proj/job/internal";
+            return $http.put(url,idDetails);
+        }
+
+        function findJobDescription(text) {
+            var url = "/proj/job/internal/"+text;
+            return $http.get(url);
+        }
 
     }
 })();

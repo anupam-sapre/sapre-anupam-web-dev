@@ -39,6 +39,9 @@
                         } else {
                             vm.error = "User not found";
                         }
+                    },
+                    function (err) {
+                        vm.error = "Unauthorized";
                     });
             }
         }

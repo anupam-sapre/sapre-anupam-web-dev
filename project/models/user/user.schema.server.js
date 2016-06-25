@@ -12,18 +12,13 @@ module.exports = function() {
         phone: String,
         dob: Date,
         gender:String,
-        jobs: [JobSchema],
+        skills:String,
         google: {
             id:    String,
             token: String,
             displayName: String
         },
-        applications: [{
-            application :{
-                type: mongoose.Schema.Types.ObjectId,
-                ref: 'ProjectJob'
-            }
-        }],
+        applications: [String],
         connections:[{user_id:String,name:String}],
         dateCreated: {type: Date, default: Date.now}
     }, {collection: "project.user"});

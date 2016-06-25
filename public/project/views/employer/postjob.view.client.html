@@ -1,0 +1,51 @@
+<div class="container-fluid">
+    <div class="navbar-header stick-to-left">
+        <a class="navbar-brand font-color font-styles" href="#/user">The Job Connector</a>
+    </div>
+    <div class="stick-to-right">
+        <a href="#/home" class="font-color"><span class="glyphicon glyphicon-minus-sign font-color"></span> Sign Out</a>
+    </div>
+</div>
+<div class="container">
+    <div ng-if="model.error" class="alert alert-danger">
+        {{model.error}}
+    </div>
+    <form>
+        <div class="form-group">
+            <label for="job-title">Job Title</label>
+            <input ng-model="jobtitle"
+                   type="text"
+                   class="form-control"
+                   id="job-title"
+                   placeholder="Android Developer">
+        </div>
+        <div class="form-group">
+            <label for="job-snippet">Description</label>
+            <textarea ng-model="snippet"
+                   type="text"
+                   class="form-control"
+                   id="job-snippet"
+                   placeholder="A software engineer working in Networks"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="job-city">City</label>
+            <input ng-model="city"
+                      type="text"
+                      class="form-control"
+                      id="job-city"
+                      placeholder="Boston">
+        </div>
+        <div class="form-group">
+            <label for="job-company">Company</label>
+            <input ng-model="company"
+                   type="text"
+                   class="form-control"
+                   id="job-company"
+                   placeholder="Deloitte">
+        </div>
+        <div class="form-group">
+            <a ng-click="model.createJob(jobtitle,city,snippet,company)" class="btn btn-primary">Submit
+            </a>
+        </div>
+    </form>
+</div>

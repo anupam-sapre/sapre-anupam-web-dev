@@ -11,7 +11,8 @@ module.exports = function() {
         findUserById:findUserById,
         findUserByUsername:findUserByUsername,
         findUserByGoogleId:findUserByGoogleId,
-        findAllUsersByUsername:findAllUsersByUsername
+        findAllUsersByUsername:findAllUsersByUsername,
+        findUsersByJobkey:findUsersByJobkey
     };
     return api;
 
@@ -31,7 +32,9 @@ module.exports = function() {
                     lastName: user.lastName,
                     gender:user.gender,
                     dob:user.dob,
-                    company:user.company
+                    company:user.company,
+                    email:user.email,
+                    skills:user.skills
                 }
             });
     }
@@ -49,6 +52,10 @@ module.exports = function() {
 
     function findUserByGoogleId(googleId) {
         return User.findOne({'google.id': googleId});
+    }
+
+    function findUsersByJobkey(jobId) {
+        return User.find({applications:jobId});
     }
 
 

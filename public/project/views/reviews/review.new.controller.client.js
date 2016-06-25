@@ -30,7 +30,7 @@
                         if (newRev._id) {
                             $location.url("/user/" + vm.userId + "/jobsearch/" + vm.jobId);
                         } else {
-                            vm.error = "Unable to create website";
+                            vm.error = "Unable to create review";
                         }
                     });
             }

@@ -28,7 +28,7 @@
                         $location.url("/user/"+vm.userId+"/jobsearch/"+vm.jobId);
                     },
                     function() {
-                        vm.error = "Unable to delete website";
+                        vm.error = "Unable to delete review";
                     }
                 );
         }

@@ -7,7 +7,10 @@ module.exports = function() {
     var api = {
         findByJobKey: findByJobKey,
         createJob:createJob,
-        findJobsByUserId:findJobsByUserId
+        findJobsByUserId:findJobsByUserId,
+        deleteJob:deleteJob,
+        findJobDescription:findJobDescription,
+        findJobsByPostedId:findJobsByPostedId
 
     };
     return api;
@@ -22,6 +25,18 @@ module.exports = function() {
     }
     
     function findJobsByUserId(userId) {
-        return Job.find({'applicants.applicant':userId})
+        return Job.find({applicants: userId});
+    }
+
+    function findJobsByPostedId(userId) {
+        return Job.find({postedBy:userId})
+    }
+
+    function deleteJob(jobid) {
+        return Job.remove({_id:jobid});
+    }
+
+    function findJobDescription(searchInput) {
+        return Job.find({snippet:  { "$regex": searchInput, "$options": "i" }});
     }
 }

@@ -16,9 +16,11 @@ module.exports = function(app,models) {
     app.post("/proj/login", passport.authenticate('localNew'), login);
     app.post ('/proj/register', register);
     app.get ('/proj/loggedin', loggedin);
-    app.post('/proj/user/job', applyJob);
+    app.put('/proj/user/job/apply', applyJob);
+    app.get('/proj/user/job/:jobId', findUsersByJobkey);
     app.put('/proj/user/conn/:userId',addConnection);
     app.get('/proj/user/conn/:userId',findConnections);
+    app.put("/proj/user/internal/:profileId",deleteApplication);
 
 
     app.get('/auth/google',passport.authenticate('google',{ scope: ['https://www.googleapis.com/auth/plus.login'] }));
@@ -48,6 +50,7 @@ module.exports = function(app,models) {
                     } else{
                         googleUser = {
                             username:  profile.displayName.replace(/ /g,''),
+                            accountType:'Applicant',
                             google: {
                                 token: token,
                                 id: profile.id,
@@ -226,6 +229,7 @@ module.exports = function(app,models) {
                     applications.push(jobs.jobId);
                     user.applications = applications;
                     user.save(function () {});
+                    res.send(user);
                 },
                 function(err) {
                     res.statusCode(404).send(err);
@@ -279,6 +283,43 @@ module.exports = function(app,models) {
             .then(
                 function(user) {
                     res.json(user.connections);
+                },
+                function(error) {
+                    res.statusCode(404).send(error);
+                }
+            )
+    }
+
+
+    function findUsersByJobkey(req,res) {
+        var jobId = req.params.jobId;
+        projUserModel
+            .findUsersByJobkey(jobId)
+            .then(
+                function(user) {
+                    res.json(user);
+                },
+                function(error) {
+                    res.statusCode(404).send(error);
+                }
+            )
+    }
+
+    function deleteApplication(req,res) {
+        var userId = req.body.userId;
+        var jobId = req.body.jobId;
+        projUserModel.
+            findUserById(userId)
+            .then(
+                function(user) {
+                    var appli = user.applications;
+                    var ind = appli.indexOf(jobId);
+                    if (ind > -1) {
+                        appli.splice(ind, 1);
+                    }
+                    user.applications = appli;
+                    user.save();
+                    res.send(200);
                 },
                 function(error) {
                     res.statusCode(404).send(error);

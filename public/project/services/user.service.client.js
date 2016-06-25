@@ -16,7 +16,9 @@
             applyJob:applyJob,
             findUserByUserName:findUserByUserName,
             addConnection:addConnection,
-            findConnections:findConnections
+            findConnections:findConnections,
+            findUsersByJobkey:findUsersByJobkey,
+            deleteApplication:deleteApplication
         };
         return api;
 
@@ -70,7 +72,7 @@
                 jobId:jobId,
                 userId:userid
             }
-            $http.put('proj/user/job',job);
+            return $http.put('/proj/user/job/apply',job);
         }
         function findUserByUserName(searchName){
             var url = "/proj/user/search/" + searchName;
@@ -90,6 +92,20 @@
         function findConnections(userId) {
             var url ="/proj/user/conn/"+userId;
             return $http.get(url);
+        }
+
+        function findUsersByJobkey(jobId) {
+            var url='/proj/user/job/'+jobId;
+            return $http.get(url);
+        }
+
+        function deleteApplication(profileId,jobId) {
+            var idDetails = {
+                userId:profileId,
+                jobId:jobId
+            }
+            var url = "/proj/user/internal/"+profileId;
+            return $http.put(url,idDetails);
         }
     }
 })();

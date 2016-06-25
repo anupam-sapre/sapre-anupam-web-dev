@@ -1,0 +1,23 @@
+<div class="container-fluid">
+    <div class="navbar-header stick-to-left">
+        <a class="navbar-brand font-color font-styles" href="#/user">The Job Connector</a>
+    </div>
+    <div class="stick-to-right">
+        <a href="#/home" class="font-color"><span class="glyphicon glyphicon-minus-sign font-color"></span> Sign Out</a>
+    </div>
+</div>
+<div class="container">
+    <ul class="list-group">
+        <li ng-repeat="job in model.joblist" class="list-group-item">
+            <a href="#/user/{{model.userId}}/jobsearch/{{job.jobkey}}">
+                {{job.jobtitle}}
+            </a>
+            <a href="#/user/{{model.userId}}/postedJob/{{job._id}}/applicants" class="pull-right">
+                <span class="glyphicon glyphicon-circle-arrow-right"> </span>
+            </a>
+            <a ng-click="model.deleteJob(job._id)" class="pull-right">
+                <span class="glyphicon glyphicon-remove"></span>
+            </a>
+        </li>
+    </ul>
+</div>

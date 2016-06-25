@@ -3,7 +3,7 @@
         .module("TheJobConnector")
         .controller("JobDetailController", JobDetailController);
 
-    function JobDetailController($routeParams,$http,JobService,$window,ReviewService) {
+    function JobDetailController($routeParams,$http,JobService,$window,ReviewService,UserService) {
         var vm =this;
         vm.jobid = $routeParams.jobid;
         vm.userId = $routeParams.userId;
@@ -59,16 +59,18 @@
                 JobService
                     .applyJob(vm.jobid, vm.userId)
                     .then(
-                        UserService
-                            .applyJob(vm.jobid, vm.userId)
-                            .then(
-                                function (response) {
-                                    vm.success="Applied successfully";
-                                }
-                                ,function (err) {
-                                    vm.error = "Unable to save job";
-                                }
-                            )
+                        function () {
+                            UserService
+                                .applyJob(vm.jobid, vm.userId)
+                                .then(
+                                    function (response) {
+                                        vm.success="Applied successfully";
+                                    }
+                                    ,function (err) {
+                                        vm.error = "Unable to save job";
+                                    }
+                                )
+                        }
                         ,
                         function(error) {
                             vm.error = "Unable to save job";
