@@ -1,0 +1,30 @@
+<div class="container-fluid">
+    <div class="navbar-header stick-to-left">
+        <a class="navbar-brand font-color font-styles" href="#/user">The Job Connector</a>
+    </div>
+    <div class="stick-to-right">
+        <a href="#/login" class="font-color"><span class="glyphicon glyphicon-log-in font-color"></span> Sign In</a>
+    </div>
+   <!-- <div class="stick-to-right">
+        <a href="#/register" class="font-color"><span class="glyphicon glyphicon-user font-color"></span> Sign Up</a>
+    </div>-->
+</div>
+<div class="container">
+    <div ng-show="model.success" class="alert alert-success alert-dismissible" role="alert">
+        {{model.success}}
+    </div>
+    <div ng-show="model.error" class="alert alert-danger alert-dismissible" role="alert">
+        {{model.error}}
+    </div>
+    <div>{{model.jobDetail.jobtitle}}</div>
+    <div>{{model.jobDetail.company}}</div>
+    <div>{{model.jobDetail.snippet}}</div>
+
+    <div class="row">
+        <div class="col-sm-3">
+            <a ng-click="model.suggestSignIn()" class="btn btn-primary">
+                Apply
+            </a>
+        </div>
+    </div>
+</div>

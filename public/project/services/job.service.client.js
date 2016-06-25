@@ -62,8 +62,7 @@
                 snippet:snippet,
                 company:company,
                 dateCreated:date,
-                url:url,
-                type:type
+                url:url
             };
             return $http.post('/proj/job',job);
         }

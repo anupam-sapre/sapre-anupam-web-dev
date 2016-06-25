@@ -85,6 +85,16 @@
                 controller: "ReviewEditController",
                 controllerAs: "model"
             })
+            .when("/search", {
+                templateUrl: "views/logout/logout.search.view.client.html",
+                controller: "LogoutSearchController",
+                controllerAs: "model"
+            })
+            .when("/search/:jobid", {
+                templateUrl: "views/logout/logout.detail.view.client.html",
+                controller: "LogoutDetailController",
+                controllerAs: "model"
+            })
             .otherwise({
                 redirectTo: "/home"
             });

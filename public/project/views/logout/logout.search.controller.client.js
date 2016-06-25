@@ -1,11 +1,10 @@
 (function () {
     angular
         .module("TheJobConnector")
-        .controller("JobSearchController", JobSearchController);
+        .controller("LogoutSearchController", LogoutSearchController);
 
-    function JobSearchController($routeParams,JobService) {
+    function LogoutSearchController($routeParams,JobService) {
         var vm =this;
-        vm.userId = $routeParams.userId;
         vm.searchIndeed=searchIndeed;
 
         function searchIndeed(text){

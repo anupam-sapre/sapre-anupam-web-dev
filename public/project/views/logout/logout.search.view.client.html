@@ -1,0 +1,57 @@
+<div class="container-fluid">
+    <div class="navbar-header stick-to-left">
+        <a class="navbar-brand font-color font-styles" href="#/user">The Job Connector</a>
+    </div>
+    <div class="stick-to-right">
+        <a href="#/login" class="font-color"><span class="glyphicon glyphicon-log-in font-color"></span> Sign In</a>
+    </div>
+    <!--<div class="stick-to-right">
+        <a href="#/register" class="font-color"><span class="glyphicon glyphicon-user font-color"></span> Sign Up</a>
+    </div>-->
+</div>
+<div class="container nav-top-space">
+    <!--<form class="form-inline">
+        <div class="form-group">
+            <input type="text" class="form-control" id="searchInput" placeholder="Java Intern">
+            <a class="btn btn-primary form-control btn-block">Search!</a>
+        </div>
+    </form>-->
+    <div ng-show="model.error" class="alert alert-danger">
+        {{model.error}}
+    </div>
+    <form>
+        <div class="form-group row">
+            <div class="col-sm-10">
+                <h2 class="font-styles font-color">Job Search</h2>
+            </div>
+            <div class="col-sm-8">
+                <input ng-model="model.searchInput" type="text" class="form-control" id="searchInput" placeholder="Java Intern">
+            </div>
+            <div class="col-sm-2">
+                <a class="btn btn-primary form-control btn-block" ng-click="model.searchIndeed(model.searchInput)">Search!</a>
+            </div>
+        </div>
+    </form>
+<span id=indeed_at><a href="http://www.indeed.com/">jobs</a> by <a
+        href="http://www.indeed.com/" title="Job Search"><img
+        src="http://www.indeed.com/p/jobsearch.gif" style="border: 0;
+vertical-align: middle;" alt="Indeed job search"></a></span>
+    <div class="row">
+        <div ng-repeat="job in model.jobResult track by $index" class="col-xs-6">
+            <div>
+                <a ng-href="#/search/{{job.jobkey}}">
+                    {{job.jobtitle}}
+                </a>
+            </div>
+            <div>
+                {{job.company}}
+            </div>
+            <div>
+                {{job.city}}
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
