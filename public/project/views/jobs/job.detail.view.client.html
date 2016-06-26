@@ -3,12 +3,15 @@
         <a class="navbar-brand font-color font-styles" href="#/user">The Job Connector</a>
     </div>
     <div class="stick-to-right">
-        <a href="#/home" class="font-color"><span class="glyphicon glyphicon-minus-sign font-color"></span> Sign Out</a>
+        <a ng-click="model.logout()" class="font-color"><span class="glyphicon glyphicon-minus-sign font-color"></span> Sign Out</a>
     </div>
 </div>
 <div class="container">
     <div ng-show="model.success" class="alert alert-success alert-dismissible" role="alert">
         {{model.success}}
+    </div>
+    <div ng-show="model.error" class="alert alert-danger">
+        {{model.error}}
     </div>
     <div>{{model.jobDetail.jobtitle}}</div>
     <div>{{model.jobDetail.company}}</div>

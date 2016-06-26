@@ -3,10 +3,11 @@
         .module("TheJobConnector")
         .controller("JobSearchController", JobSearchController);
 
-    function JobSearchController($routeParams,JobService) {
+    function JobSearchController($routeParams,JobService,UserService,$rootScope,$location) {
         var vm =this;
         vm.userId = $routeParams.userId;
         vm.searchIndeed=searchIndeed;
+        vm.logout=logout;
 
         function searchIndeed(text){
             JobService.fetchip().then(
@@ -42,6 +43,20 @@
                     vm.error='Problem fetching information Please try after some time';
                 }
             );
+        }
+
+        function logout() {
+            UserService.logout()
+                .then(
+                    function (response) {
+                        $rootScope.currentUser = null;
+                        $location.url("/login");
+                    }
+                    , function () {
+                        $rootScope.currentUser = null;
+                        $location.url("/login");
+                    }
+                )
         }
     }
 })();

@@ -3,11 +3,12 @@
         .module("TheJobConnector")
         .controller("PostJobController",PostJobController);
 
-    function PostJobController($location,$routeParams,JobService) {
+    function PostJobController($location,$routeParams,JobService,$rootScope,UserService,$location) {
         var vm = this;
         vm.userId = $routeParams.userId;
         vm.createJob = createJob;
         vm.jobtitleerror = false;
+        vm.logout=logout;
 
         function createJob(jobtitle,city,snippet,company) {
             vm.jobtitleerror = false;
@@ -35,6 +36,20 @@
                         }
                     });
             }
+        }
+
+        function logout() {
+            UserService.logout()
+                .then(
+                    function (response) {
+                        $rootScope.currentUser = null;
+                        $location.url("/login");
+                    }
+                    , function () {
+                        $rootScope.currentUser = null;
+                        $location.url("/login");
+                    }
+                )
         }
     }
 })();

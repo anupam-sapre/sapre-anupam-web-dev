@@ -20,8 +20,10 @@ module.exports = function(app,models) {
             .findByJobKey(jobkey)
             .then(
                 function (job) {
-                    job.applicants.push(jobs.userId);
-                    job.save(function (){});
+                    if(job.applicants.indexOf(jobs.userId) == -1){
+                        job.applicants.push(jobs.userId);
+                        job.save(function (){});
+                    }
                     res.send(job);
                 }
                 ,function(err) {

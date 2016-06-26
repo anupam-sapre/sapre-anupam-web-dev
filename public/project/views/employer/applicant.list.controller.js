@@ -3,11 +3,12 @@
         .module("TheJobConnector")
         .controller("ApplicantListController", ApplicantListController);
 
-    function ApplicantListController($routeParams, JobService,UserService,$location) {
+    function ApplicantListController($routeParams, JobService,UserService,$location,$rootScope) {
         var vm = this;
         vm.userId = $routeParams.userId;
         vm.jobId = $routeParams.jobId;
         vm.deleteApplication=deleteApplication;
+        vm.logout=logout;
 
         function init() {
             UserService.findUsersByJobkey(vm.jobId)
@@ -26,7 +27,7 @@
                             .deleteApplication(profileId,vm.jobId)
                             .then(
                                 function () {
-                                    $location.url("/user/"+vm.userId+"/postedJob/"+vm.jobId+"/applicants");
+                                    init();
                                 }
                                 ,function () {
                                     vm.error = "Unable to delete application";
@@ -37,6 +38,20 @@
                         vm.error = "Unable to delete application";
                     }
                 );
+        }
+
+        function logout() {
+            UserService.logout()
+                .then(
+                    function (response) {
+                        $rootScope.currentUser = null;
+                        $location.url("/login");
+                    }
+                    , function () {
+                        $rootScope.currentUser = null;
+                        $location.url("/login");
+                    }
+                )
         }
 
     }

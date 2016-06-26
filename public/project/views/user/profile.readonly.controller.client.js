@@ -4,12 +4,12 @@
         .controller("ProfileViewOnlyController", ProfileViewOnlyController);
 
 
-    function ProfileViewOnlyController($routeParams,UserService) {
+    function ProfileViewOnlyController($routeParams,UserService,$rootScope,$location) {
         var vm =this;
         vm.userId = $routeParams.userId;
         vm.profileId = $routeParams.profileId;
         vm.addConnection = addConnection;
-
+        vm.logout = logout;
 
         function init() {
             UserService
@@ -33,6 +33,19 @@
                         vm.error = "Unable to add connection"
                     }
                 );
+        }
+        function logout() {
+            UserService.logout()
+                .then(
+                    function (response) {
+                        $rootScope.currentUser = null;
+                        $location.url("/login");
+                    }
+                    ,function () {
+                        $rootScope.currentUser = null;
+                        $location.url("/login");
+                    }
+                )
         }
 
 

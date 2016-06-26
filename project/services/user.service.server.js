@@ -5,6 +5,8 @@ var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
 module.exports = function(app,models) {
 
+    var multer = require('multer');
+    var upload = multer({ dest: __dirname+'/../../public/uploads' });
     var projUserModel = models.projUserModel;
 
     app.post("/proj/user", createUser);
@@ -21,6 +23,10 @@ module.exports = function(app,models) {
     app.put('/proj/user/conn/:userId',addConnection);
     app.get('/proj/user/conn/:userId',findConnections);
     app.put("/proj/user/internal/:profileId",deleteApplication);
+
+    app.post ("/proj/upload", upload.single('myFile'), uploadImage);
+
+    app.post ("/proj/uploadResume", upload.single('myResume'), uploadResume);
 
 
     app.get('/auth/google',passport.authenticate('google',{ scope: ['https://www.googleapis.com/auth/plus.login'] }));
@@ -226,9 +232,11 @@ module.exports = function(app,models) {
             .then(
                 function (user) {
                     var applications = user.applications;
-                    applications.push(jobs.jobId);
-                    user.applications = applications;
-                    user.save(function () {});
+                    if(applications.indexOf(jobs.jobId) == -1){
+                        applications.push(jobs.jobId);
+                        user.applications = applications;
+                        user.save(function () {});
+                    }
                     res.send(user);
                 },
                 function(err) {
@@ -322,6 +330,60 @@ module.exports = function(app,models) {
                     res.send(200);
                 },
                 function(error) {
+                    res.statusCode(404).send(error);
+                }
+            )
+    }
+
+    function uploadImage(req, res) {
+        var userId        = req.body.userId;
+        var myFile        = req.file;
+        var originalname  = myFile.originalname; // file name on user's computer
+        var filename      = myFile.filename;     // new file name in upload folder
+        var path          = myFile.path;         // full path of uploaded file
+        var destination   = myFile.destination;  // folder where file is saved to
+        var size          = myFile.size;
+        var mimetype      = myFile.mimetype;
+        projUserModel.
+            findUserById(userId)
+            .then(
+                function(user) {
+                    if(user){
+                        user.photoUrl = "/uploads/"+filename;
+                        user.save();
+                        res.redirect("/project/#/user");
+                    }
+                    else{
+                        res.statusCode(404).send(error);
+                    }
+                }, function(error) {
+                    res.statusCode(404).send(error);
+                }
+            )
+    }
+
+    function uploadResume(req, res) {
+        var userId        = req.body.userId;
+        var myFile        = req.file;
+        var originalname  = myFile.originalname; // file name on user's computer
+        var filename      = myFile.filename;     // new file name in upload folder
+        var path          = myFile.path;         // full path of uploaded file
+        var destination   = myFile.destination;  // folder where file is saved to
+        var size          = myFile.size;
+        var mimetype      = myFile.mimetype;
+        projUserModel.
+            findUserById(userId)
+            .then(
+                function(user) {
+                    if(user){
+                        user.resumeUrl = "/uploads/"+filename;
+                        user.save();
+                        res.redirect("/project/#/user");
+                    }
+                    else{
+                        res.statusCode(404).send(error);
+                    }
+                }, function(error) {
                     res.statusCode(404).send(error);
                 }
             )

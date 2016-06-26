@@ -13,6 +13,8 @@ module.exports = function() {
         dob: Date,
         gender:String,
         skills:String,
+        photoUrl:{type:String, default:"https://goo.gl/PJZXJ6"},
+        resumeUrl:String,
         google: {
             id:    String,
             token: String,

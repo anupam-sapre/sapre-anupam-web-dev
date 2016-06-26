@@ -3,13 +3,14 @@
         .module("TheJobConnector")
         .controller("ReviewEditController", ReviewEditController);
 
-    function ReviewEditController($routeParams, ReviewService,$location) {
+    function ReviewEditController($routeParams, ReviewService,$location,UserService,$rootScope) {
         var vm = this;
         vm.userId = $routeParams.userId;
         vm.jobId = $routeParams.jobid;
         vm.reviewId = $routeParams.reviewId;
         vm.deleteReview = deleteReview;
         vm.updateReview = updateReview;
+        vm.logout=logout;
 
         function init() {
             ReviewService
@@ -46,6 +47,20 @@
                     }
                 );
 
+        }
+
+        function logout() {
+            UserService.logout()
+                .then(
+                    function (response) {
+                        $rootScope.currentUser = null;
+                        $location.url("/login");
+                    }
+                    ,function () {
+                        $rootScope.currentUser = null;
+                        $location.url("/login");
+                    }
+                )
         }
 
     }

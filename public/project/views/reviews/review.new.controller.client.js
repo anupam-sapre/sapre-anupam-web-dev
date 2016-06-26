@@ -3,25 +3,27 @@
         .module("TheJobConnector")
         .controller("ReviewNewController",ReviewNewController);
 
-    function ReviewNewController($location,$routeParams,ReviewService) {
+    function ReviewNewController($location,$routeParams,ReviewService,UserService,$rootScope) {
         var vm = this;
         vm.userId = $routeParams.userId;
         vm.jobId = $routeParams.jobid;
         vm.createReview = createReview;
         vm.reviewError = false;
-        function createReview(review, rating,title) {
+        vm.logout = logout;
+
+        function createReview(review, rating, title) {
             vm.reviewError = false;
-            if(!review){
+            if (!review) {
                 vm.reviewError = true;
-                vm.error="Review is required";
+                vm.error = "Review is required";
             }
             else {
                 var newReview = {
-                    user_id:vm.userId,
-                    jobkey:vm.jobId,
+                    user_id: vm.userId,
+                    jobkey: vm.jobId,
                     review: review,
                     rating: rating,
-                    title:title
+                    title: title
                 };
                 ReviewService
                     .createReview(newReview)
@@ -34,6 +36,21 @@
                         }
                     });
             }
+        }
+
+
+        function logout() {
+            UserService.logout()
+                .then(
+                    function (response) {
+                        $rootScope.currentUser = null;
+                        $location.url("/login");
+                    }
+                    , function () {
+                        $rootScope.currentUser = null;
+                        $location.url("/login");
+                    }
+                )
         }
     }
 })();

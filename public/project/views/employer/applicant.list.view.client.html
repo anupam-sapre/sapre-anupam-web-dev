@@ -3,7 +3,7 @@
         <a class="navbar-brand font-color font-styles" href="#/user">The Job Connector</a>
     </div>
     <div class="stick-to-right">
-        <a href="#/home" class="font-color"><span class="glyphicon glyphicon-minus-sign font-color"></span> Sign Out</a>
+        <a ng-click="model.logout()" class="font-color"><span class="glyphicon glyphicon-minus-sign font-color"></span> Sign Out</a>
     </div>
 </div>
 <div class="container">
@@ -12,8 +12,8 @@
             <a href="#/user/{{model.userId}}/view/{{profile._id}}">
                 {{profile.firstName}} {{profile.lastName}}
             </a>
-            <a href="#/user/{{model.userId}}/view/{{profile._id}}" class="pull-right">
-                <span class="glyphicon glyphicon-eye-open"></span>
+            <a href="{{profile.resumeUrl}}" class="pull-right" download>
+                <span class="glyphicon glyphicon-download-alt"></span>
             </a>
             <a ng-click="model.deleteApplication(profile._id)" class="pull-right">
                 <span class="glyphicon glyphicon-remove"></span>
