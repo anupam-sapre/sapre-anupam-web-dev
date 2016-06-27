@@ -68,7 +68,7 @@
                 resolve: { loggedin: checkLoggedin }
             })
             .when("/user/:userId/selectedjobs", {
-                templateUrl: "views/jobs/selectedjobs.view.client.html",
+                templateUrl: "views/jobs/selectedJobs.view.client.html",
                 controller: "SelectedJobsController",
                 controllerAs: "model",
                 resolve: { loggedin: checkLoggedin }
