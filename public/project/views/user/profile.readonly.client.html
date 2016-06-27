@@ -46,9 +46,13 @@
                             <p><strong>Birth Date: </strong> {{model.profile.dob |  date:'shortDate'}} </p>
                             </span>
                     <p><strong>Gender: </strong> {{model.profile.gender}} </p>
-                    <p><strong>Skills: </strong>
-                        <span class="label label-info tags">{{model.profile.skills}}</span>
-                    </p>
+                    <div ng-switch="model.profile.accountType">
+                        <div ng-switch-when="Applicant">
+                            <p><strong>Skills: </strong>
+                                <span class="label label-info tags">{{model.profile.skills}}</span>
+                            </p>
+                        </div>
+                    </div>
                 </div>
                 <!--/col-->
                 <div class="clearfix"></div>

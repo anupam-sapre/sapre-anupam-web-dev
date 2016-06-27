@@ -38,16 +38,13 @@
     </div>
 
     <div class="row">
-        <div ng-repeat="profile in model.profileResult track by $index" class="col-xs-12">
-            <div class="col-md-8 col-xs-10">
-                <div class="well panel panel-default">
-                    <div class="panel-body">
+        <div ng-repeat="profile in model.profileResult track by $index">
                         <div class="row">
-                            <div class="col-xs-12 col-sm-2 text-center">
+                            <div class="col-md-1 col-xs-5 col-sm-1 text-center">
                                 <img ng-src="{{profile.photoUrl}}" alt="" class="center-block img-circle img-thumbnail img-responsive">
                             </div>
                             <!--/col-->
-                            <div class="col-xs-12 col-sm-6">
+                            <div class="col-md-8 col-sm-8 ">
                                 <a ng-href="#/user/{{model.userId}}/view/{{profile._id}}">
                                     <h3>{{profile.firstName}} {{profile.lastName}}</h3>
                                     </a>
@@ -64,12 +61,7 @@
                             </div>-->
                             <!--/col-->
                         </div>
-                        <!--/row-->
-                    </div>
-                    <!--/panel-body-->
-                </div>
                 <!--/panel-->
-            </div>
         </div>
     </div>
 </div>

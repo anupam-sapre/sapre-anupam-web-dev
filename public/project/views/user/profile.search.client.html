@@ -43,37 +43,29 @@
         </div>
     </div>
     <div class="row">
-        <div ng-repeat="user in model.userResult track by $index" class="col-xs-6">
+        <div ng-repeat="user in model.userResult track by $index">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-8 col-xs-10">
-                        <div class="well panel panel-default">
-                            <div class="panel-body">
-                                <div class="row">
-                                    <div class="col-xs-12 col-sm-2 text-center">
-                                        <img ng-src="{{user.photoUrl}}" alt="" class="center-block img-circle img-thumbnail img-responsive">
-                                    </div>
-                                    <!--/col-->
-                                    <div class="col-xs-12 col-sm-6">
-                                        <a ng-href="#/user/{{model.userId}}/view/{{user._id}}">
-                                            <h3>{{user.firstName}} {{user.lastName}}</h3>
-                                        </a>
-                                    </div>
-
-                                    <!--/col-->
-                                   <!-- <div class="clearfix"></div>
-                                    <div class="col-xs-12 col-sm-3">
-                                        <a ng-click="model.addConnection(user)"><button class="btn btn-success btn-block">
-                                            <span class="fa fa-plus-circle"></span> Follow </button></a>
-                                    </div>-->
-                                    <!--/col-->
-                                </div>
-                                <!--/row-->
-                            </div>
-                            <!--/panel-body-->
+                    <div class="row">
+                        <div class="col-md-1 col-xs-5 col-sm-1 text-center">
+                            <img ng-src="{{user.photoUrl}}" alt="" class="center-block img-circle img-thumbnail img-responsive">
                         </div>
-                        <!--/panel-->
+                        <!--/col-->
+                        <div class="col-md-8 col-sm-8">
+                            <a ng-href="#/user/{{model.userId}}/view/{{user._id}}">
+                                <h3>{{user.firstName}} {{user.lastName}}</h3>
+                            </a>
+                        </div>
+
+                        <!--/col-->
+                        <!-- <div class="clearfix"></div>
+                         <div class="col-xs-12 col-sm-3">
+                             <a ng-click="model.addConnection(user)"><button class="btn btn-success btn-block">
+                                 <span class="fa fa-plus-circle"></span> Follow </button></a>
+                         </div>-->
+                        <!--/col-->
                     </div>
+                    <!--/row-->
                     <!--/col-->
                 </div>
                 <!--/row-->

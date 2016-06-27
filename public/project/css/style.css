@@ -168,3 +168,7 @@ div ul li.pull-right{
 
 .top-buffer { margin-top:10px; }
 .bottom-buffer { margin-bottom:15px; }
+
+.icon-space {
+    margin-right: 5px;
+}
