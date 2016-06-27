@@ -21,8 +21,11 @@
     </div>
 </div>
 
-<div class="container nav-top-space">
+<div class="container">
 
+    <div ng-show="model.success" class="alert alert-success alert-dismissible" role="alert">
+        {{model.success}}
+    </div>
     <div ng-show="model.error" class="alert alert-danger">
         {{model.error}}
     </div>

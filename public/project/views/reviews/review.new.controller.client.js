@@ -11,6 +11,20 @@
         vm.reviewError = false;
         vm.logout = logout;
 
+        function init() {
+            var backUrl = $rootScope.currentUrl;
+            var currUrl = "#/user/"+vm.userId+"/jobsearch/"+vm.jobId+"/review/new";
+            if(backUrl!=currUrl){
+                $rootScope.backUrl=$rootScope.currentUrl;
+                $rootScope.currentUrl=currUrl;
+            }
+            vm.backUrl=$rootScope.backUrl;
+            if(!vm.backUrl){
+                vm.backUrl="#/user";
+            }
+        }
+        init();
+
         function createReview(review, rating, title) {
             vm.reviewError = false;
             if (!review) {

@@ -10,12 +10,20 @@
         var id = $rootScope.currentUser._id;
         vm.logout=logout;
 
+
         function init() {
             UserService
                 .findUserById(id)
                 .then(function(response){
                     vm.user = response.data;
                     vm.user.dob=new Date(vm.user.dob);
+                    var backUrl = $rootScope.currentUrl;
+                    var currUrl = "#/user";
+                    if(backUrl!=currUrl){
+                        $rootScope.backUrl=$rootScope.currentUrl;
+                        $rootScope.currentUrl=currUrl;
+                    }
+                    vm.backUrl=$rootScope.backUrl;
                 });
 
         }
@@ -29,7 +37,7 @@
                         vm.success = "Updated successfully";
                     },
                     function(error) {
-                        vm.error = "Unable to update user"
+                        vm.error = "Unable to update user";
                     }
                 );
         }

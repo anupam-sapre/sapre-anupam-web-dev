@@ -13,6 +13,16 @@
             ReviewService.findReviewsByUserAndJob(vm.userId, vm.jobId)
                 .then(function (response) {
                     vm.reviews = response.data;
+                    var backUrl = $rootScope.currentUrl;
+                    var currUrl = "#/user/"+vm.userId+"/jobsearch/"+vm.jobId+"/review";
+                    if(backUrl!=currUrl){
+                        $rootScope.backUrl=$rootScope.currentUrl;
+                        $rootScope.currentUrl=currUrl;
+                    }
+                    vm.backUrl=$rootScope.backUrl;
+                    if(!vm.backUrl){
+                        vm.backUrl="#/user";
+                    }
                 });
         }
 

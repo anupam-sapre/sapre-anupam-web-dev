@@ -2,6 +2,14 @@ input.form-control {
     margin-bottom: 5px;
 }
 
+.navbar-static-top {
+    margin-bottom: 19px;
+}
+
+.page-body {
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
 
 .nav-top-space{
     padding-top: 60px;
@@ -138,7 +146,7 @@ div ul li.pull-right{
     position: relative;
     background: #F7F7F7;
     padding: 15px;
-    margin-top: 50px;
+    margin-top: 20px;
 }
 
 .comments .media-body p::before {
@@ -159,3 +167,4 @@ div ul li.pull-right{
 }
 
 .top-buffer { margin-top:10px; }
+.bottom-buffer { margin-bottom:15px; }

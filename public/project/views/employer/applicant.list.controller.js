@@ -15,6 +15,16 @@
             UserService.findUsersByJobkey(vm.jobId)
                 .then(function (response) {
                     vm.profilelist  = response.data;
+                    var backUrl = $rootScope.currentUrl;
+                    var currUrl = "#/user/"+vm.userId+"/postedJob/"+vm.jobId+"/applicants";
+                    if(backUrl!=currUrl){
+                        $rootScope.backUrl=$rootScope.currentUrl;
+                        $rootScope.currentUrl=currUrl;
+                    }
+                    vm.backUrl=$rootScope.backUrl;
+                    if(!vm.backUrl){
+                        vm.backUrl="#/user";
+                    }
                 });
         }
         init();

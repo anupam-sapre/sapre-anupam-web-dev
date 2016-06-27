@@ -269,11 +269,14 @@ module.exports = function(app,models) {
             .findUserById(id)
             .then(
                 function (user) {
-                    var conne = user.connections;
-                    if(conne.indexOf(profileId) == -1){
-                        conne.push(profileId);
-                        user.connections = conne;
-                        user.save(function () {});
+                    if(profileId!= id){
+                        var conne = user.connections;
+                        var ind = conne.indexOf(profileId);
+                        if (ind == -1) {
+                            conne.push(profileId);
+                            user.connections = conne;
+                            user.save(function () {});
+                        }
                     }
                     res.send(user);
                 },
@@ -282,7 +285,7 @@ module.exports = function(app,models) {
                 }
             );
     }
-    
+
     function findConnections(req,res) {
         var userId = req.params.userId;
         projUserModel.

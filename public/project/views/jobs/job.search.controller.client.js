@@ -9,6 +9,19 @@
         vm.searchIndeed=searchIndeed;
         vm.logout=logout;
 
+        function init() {
+            var backUrl = $rootScope.currentUrl;
+            var currUrl = "#/user/"+vm.userId+"/jobsearch";
+            if(backUrl!=currUrl){
+                $rootScope.backUrl=$rootScope.currentUrl;
+                $rootScope.currentUrl=currUrl;
+            }
+            vm.backUrl=$rootScope.backUrl;
+            if(!vm.backUrl){
+                vm.backUrl="#/user";
+            }
+        }
+        init();
         function searchIndeed(text){
             JobService.fetchip().then(
                 function (ipaddress) {

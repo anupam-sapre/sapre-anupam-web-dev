@@ -22,7 +22,7 @@ module.exports = function() {
         },
         applications: [String],
         selectedJobs:[String],
-        connections:[{user_id:String,name:String}],
+        connections:[String],
         dateCreated: {type: Date, default: Date.now}
     }, {collection: "project.user"});
 

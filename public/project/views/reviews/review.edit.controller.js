@@ -17,6 +17,16 @@
                 .findReviewById(vm.reviewId)
                 .then(function(response){
                     vm.review = response.data;
+                    var backUrl = $rootScope.currentUrl;
+                    var currUrl = "#/user/"+vm.userId+"/jobsearch/"+vm.jobId+"/review/"+vm.reviewId;
+                    if(backUrl!=currUrl){
+                        $rootScope.backUrl=$rootScope.currentUrl;
+                        $rootScope.currentUrl=currUrl;
+                    }
+                    vm.backUrl=$rootScope.backUrl;
+                    if(!vm.backUrl){
+                        vm.backUrl="#/user";
+                    }
                 });
         }
         init();

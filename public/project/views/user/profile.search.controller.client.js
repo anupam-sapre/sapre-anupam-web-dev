@@ -10,7 +10,22 @@
         vm.searchProfile = searchProfile;
         vm.logout = logout;
         vm.addConnection=addConnection;
-        
+        vm.currUser =$rootScope.currentUser;
+
+        function init() {
+            var backUrl = $rootScope.currentUrl;
+            var currUrl = "#/user/"+vm.userId+"/view";
+            if(backUrl!=currUrl){
+                $rootScope.backUrl=$rootScope.currentUrl;
+                $rootScope.currentUrl=currUrl;
+            }
+            vm.backUrl=$rootScope.backUrl;
+            if(!vm.backUrl){
+                vm.backUrl="#/user";
+            }
+        }
+        init();
+
         function searchProfile(searchUser) {
             UserService.
                 findUserByUserName(searchUser)

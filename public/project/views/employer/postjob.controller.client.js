@@ -10,6 +10,20 @@
         vm.jobtitleerror = false;
         vm.logout=logout;
 
+        function init(){
+            var backUrl = $rootScope.currentUrl;
+            var currUrl = "#/user/"+vm.userId+"/postedJob/new";
+            if(backUrl!=currUrl){
+                $rootScope.backUrl=$rootScope.currentUrl;
+                $rootScope.currentUrl=currUrl;
+            }
+            vm.backUrl=$rootScope.backUrl;
+            if(!vm.backUrl){
+                vm.backUrl="#/user";
+            }
+        }
+        init();
+
         function createJob(jobtitle,city,snippet,company) {
             vm.jobtitleerror = false;
             if(!jobtitle){

@@ -10,7 +10,7 @@
         vm.applyJob = applyJob;
         vm.logout=logout;
         vm.getTimes=getTimes;
-        
+
 
 
         function init() {
@@ -24,6 +24,16 @@
                                 .then(
                                     function (results) {
                                         vm.reviewResult =results.data;
+                                        var backUrl = $rootScope.currentUrl;
+                                        var currUrl = "#/user/"+vm.userId+"/jobsearch/"+vm.jobid ;
+                                        if(backUrl!=currUrl){
+                                            $rootScope.backUrl=$rootScope.currentUrl;
+                                            $rootScope.currentUrl=currUrl;
+                                        }
+                                        vm.backUrl=$rootScope.backUrl;
+                                        if(!vm.backUrl){
+                                            vm.backUrl="#/user";
+                                        }
                                     }
                                     ,
                                     function (err) {
@@ -41,6 +51,16 @@
                                         JobService.createJob(vm.jobDetail.jobtitle,
                                             vm.jobDetail.jobkey,vm.jobDetail.snippet,
                                             vm.jobDetail.company,vm.jobDetail.date,vm.jobDetail.url,'Indeed');
+                                        var backUrl = $rootScope.currentUrl;
+                                        var currUrl = "#/user/"+vm.userId+"/jobsearch/"+vm.jobid ;
+                                        if(backUrl!=currUrl){
+                                            $rootScope.backUrl=$rootScope.currentUrl;
+                                            $rootScope.currentUrl=currUrl;
+                                        }
+                                        vm.backUrl=$rootScope.backUrl;
+                                        if(!vm.backUrl){
+                                            vm.backUrl="#/user";
+                                        }
                                     },
                                     function (err) {
                                         console.log(err);

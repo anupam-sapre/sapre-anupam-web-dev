@@ -13,9 +13,29 @@
             (
                 function (profileResult) {
                     vm.profileResult =  profileResult.data;
+                    var backUrl = $rootScope.currentUrl;
+                    var currUrl = "#/user/"+vm.userId+"/myconnections";
+                    if(backUrl!=currUrl){
+                        $rootScope.backUrl=$rootScope.currentUrl;
+                        $rootScope.currentUrl=currUrl;
+                    }
+                    vm.backUrl=$rootScope.backUrl;
+                    if(!vm.backUrl){
+                        vm.backUrl="#/user";
+                    }
                 },
                 function (err) {
-                    vm.error="No connections found"
+                    vm.error="No connections found";
+                    var backUrl = $rootScope.currentUrl;
+                    var currUrl = "#/user/"+vm.userId+"/myconnections";
+                    if(backUrl!=currUrl){
+                        $rootScope.backUrl=$rootScope.currentUrl;
+                        $rootScope.currentUrl=currUrl;
+                    }
+                    vm.backUrl=$rootScope.backUrl;
+                    if(!vm.backUrl){
+                        vm.backUrl="#/user";
+                    }
                 }
             )
         }

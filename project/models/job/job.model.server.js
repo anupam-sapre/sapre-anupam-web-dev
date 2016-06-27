@@ -37,7 +37,7 @@ module.exports = function() {
     }
 
     function findJobDescription(searchInput) {
-        return Job.find({snippet:  { "$regex": searchInput, "$options": "i" }});
+        return Job.find({jobtitle:  { "$regex": searchInput, "$options": "i" }});
     }
 
     function findSelectedJobsByUserId(userId) {

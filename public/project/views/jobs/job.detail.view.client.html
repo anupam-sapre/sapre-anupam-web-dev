@@ -1,17 +1,36 @@
-<div class="container-fluid">
-    <div class="navbar-header stick-to-left">
-        <a class="navbar-brand font-color font-styles" href="#/user">The Job Connector</a>
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand font-styles font-color" href="#/user">The Job Connector</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav font-styles">
+                <li><a href="{{model.backUrl}}">Back</a></li>
+                <li><a href="#/user">Home</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a ng-click="model.logout()"><span class="glyphicon glyphicon-minus-sign font-color"></span>Sign Out</a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
     </div>
-    <div class="stick-to-right">
-        <a ng-click="model.logout()" class="font-color"><span class="glyphicon glyphicon-minus-sign font-color"></span> Sign Out</a>
-    </div>
-</div>
-<div class="container">
+</nav>
+<div class="container page-body">
     <div ng-show="model.success" class="alert alert-success alert-dismissible" role="alert">
         {{model.success}}
     </div>
     <div ng-show="model.error" class="alert alert-danger">
         {{model.error}}
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <h3 class="font-styles font-color" >Job Description</h3>
+        </div>
     </div>
     <div class="row">
     <div class="col-xs-12 col-sm-8">
@@ -20,7 +39,7 @@
         <p><strong>Description: </strong> {{model.jobDetail.snippet}} </p>
     </div>
     </div>
-    <div class="row">
+    <div class="row bottom-buffer">
         <div class="col-sm-3">
             <a ng-click="model.applyJob()" class="btn btn-primary">
                 Apply
@@ -45,11 +64,12 @@
                 <div ng-repeat="review in model.reviewResult track by $index">
                     <li class="media">
                         <div class="media-body">
-                            <h5 class="media-heading pull-left">
+                            <div class="row">
+                            <h5 class="media-heading pull-left col-sm-2">
                                 <a ng-href="#/user/{{model.userId}}/view/{{review.user_id}}">
                                     {{review.username}}
                                 </a></h5>
-                            <div class="comment-info pull-left">
+                            <div class="comment-info pull-left col-sm-6">
                                 <div class="btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title=""><i class="fa fa-user"></i></div>
                                 <div class="btn btn-primary btn-xs">
                                 <ul class="list-inline ratings text-center" title="Ratings">
@@ -59,6 +79,7 @@
                                 </ul>
                                     </div>
                                 <div class="btn btn-default btn-xs"><i class="fa fa-clock-o"></i> Posted on {{review.date_posted | date : 'shortDate'}}</div>
+                            </div>
                             </div>
                             <br class="clearfix">
                             <p class="well"> {{review.review}}</p>

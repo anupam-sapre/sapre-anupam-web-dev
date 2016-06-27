@@ -1,16 +1,41 @@
-<div class="container-fluid">
-    <div class="navbar-header stick-to-left">
-        <a class="navbar-brand font-color font-styles" href="#/user">The Job Connector</a>
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand font-styles font-color" href="#/user">The Job Connector</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav font-styles">
+                <li><a href="{{model.backUrl}}">Back</a></li>
+                <li><a href="#/user">Home</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a ng-click="model.logout()"><span class="glyphicon glyphicon-minus-sign font-color"></span>Sign Out</a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
     </div>
-    <div class="stick-to-right">
-        <a ng-click="model.logout()" class="font-color"><span class="glyphicon glyphicon-minus-sign font-color"></span> Sign Out</a>
+</nav>
+<div class="container page-body">
+    <div ng-show="model.success" class="alert alert-success alert-dismissible" role="alert">
+        {{model.success}}
     </div>
-</div>
-<div class="container">
+    <div ng-show="model.error" class="alert alert-danger">
+        {{model.error}}
+    </div>
+    <div class="row bottom-buffer">
+        <div class="col-md-8">
+            <h3 class="font-styles font-color" >Review List</h3>
+        </div>
+    </div>
     <ul class="list-group">
         <li ng-repeat="review in model.reviews" class="list-group-item">
             <a href="#/user/{{review.user_id}}/jobsearch/{{review.jobkey}}/review/{{review._id}}">
-                {{review.title}}
+                {{review.review}}
             </a>
             <a href="#/user/{{review.user_id}}/jobsearch/{{review.jobkey}}/review/{{review._id}}" class="pull-right">
                 <span class="glyphicon glyphicon-cog"></span>

@@ -17,6 +17,16 @@
                 .then(function(response){
                     vm.profile = response.data;
                     vm.profile.dob=new Date(vm.profile.dob);
+                    var backUrl = $rootScope.currentUrl;
+                    var currUrl = "#/user/"+vm.userId+"/view/"+vm.profileId;
+                    if(backUrl!=currUrl){
+                        $rootScope.backUrl=$rootScope.currentUrl;
+                        $rootScope.currentUrl=currUrl;
+                    }
+                    vm.backUrl=$rootScope.backUrl;
+                    if(!vm.backUrl){
+                        vm.backUrl="#/user";
+                    }
                 });
         }
         init();
