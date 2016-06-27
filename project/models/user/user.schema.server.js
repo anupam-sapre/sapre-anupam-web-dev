@@ -24,7 +24,7 @@ module.exports = function() {
         selectedJobs:[String],
         connections:[String],
         dateCreated: {type: Date, default: Date.now}
-    }, {collection: "project.user"});
+    }, {collection: "proj.user"});
 
     return UserSchema;
 };

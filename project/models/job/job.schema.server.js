@@ -16,7 +16,7 @@ module.exports = function() {
         applicants: [String],
         selectedApplicants:[String],
         dateCreated: {type: Date, default: Date.now}
-    }, {collection: "project.job"});
+    }, {collection: "proj.job"});
 
     return JobSchema;
 };

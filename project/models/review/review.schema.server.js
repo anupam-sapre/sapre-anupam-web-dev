@@ -14,7 +14,7 @@ module.exports = function (mongoose) {
         date_posted:{type: Date, default: Date.now},
         review: String,
 
-    }, {collection: 'project.review'});
+    }, {collection: 'proj.review'});
 
     // returning Schema
     return reviewSchema;
