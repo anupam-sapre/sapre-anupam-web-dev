@@ -9,6 +9,7 @@
         vm.jobId = $routeParams.jobId;
         vm.deleteApplication=deleteApplication;
         vm.logout=logout;
+        vm.selectApplicant= selectApplicant;
 
         function init() {
             UserService.findUsersByJobkey(vm.jobId)
@@ -38,6 +39,27 @@
                         vm.error = "Unable to delete application";
                     }
                 );
+        }
+
+        function selectApplicant(profileId){
+            deleteApplication(profileId);
+            JobService.selectApplicant(profileId,vm.jobId)
+                .then(
+                    function () {
+                        UserService.selectApplicant(profileId,vm.jobId)
+                            .then(
+                                function () {
+                                    vm.success="Selected Applicant";
+                                }
+                                ,function () {
+                                    vm.error = "Unable to delete application";
+                                }
+                            )
+                    },
+                    function (res) {
+
+                    }
+                )
         }
 
         function logout() {

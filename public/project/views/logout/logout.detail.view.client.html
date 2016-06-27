@@ -16,9 +16,11 @@
     <div ng-show="model.error" class="alert alert-danger alert-dismissible" role="alert">
         {{model.error}}
     </div>
-    <div>{{model.jobDetail.jobtitle}}</div>
-    <div>{{model.jobDetail.company}}</div>
-    <div>{{model.jobDetail.snippet}}</div>
+    <div class="col-xs-12 col-sm-8">
+        <h4>{{model.jobDetail.jobtitle}}</h4>
+        <p><strong>Company: </strong> {{model.jobDetail.company}} </p>
+        <p><strong>Description: </strong> {{model.jobDetail.snippet}} </p>
+    </div>
 
     <div class="row">
         <div class="col-sm-3">

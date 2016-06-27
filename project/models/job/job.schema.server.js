@@ -14,6 +14,7 @@ module.exports = function() {
         city:String,
         url:String,
         applicants: [String],
+        selectedApplicants:[String],
         dateCreated: {type: Date, default: Date.now}
     }, {collection: "project.job"});
 

@@ -22,7 +22,7 @@
                 .deleteJob(jobId)
                 .then(
                     function(){
-                        $location.url("/user/"+vm.userId+"/postedJob");
+                        init();
                     },
                     function() {
                         vm.error = "Unable to delete job";

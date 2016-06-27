@@ -18,6 +18,11 @@
             <h2 class="font-styles font-color">Profile</h2>
         </li>
         <li class="pull-right formdata">
+            <a href="#/user/{{model.user._id}}/view/{{model.user._id}}">
+                <span class="glyphicon glyphicon-eye-open"></span>
+            </a>
+        </li>
+        <li class="pull-right formdata">
             <a ng-click="enable=!enable" ng-init="enable=true">
                 <span class="glyphicon glyphicon-edit"></span>
             </a>
@@ -126,6 +131,7 @@
             <ul class="nav nav-pills nav-justified">
                 <li class="active"><a href="#/user/{{model.user._id}}/jobsearch">Search Jobs</a></li>
                 <li><a href="#/user/{{model.user._id}}/myjobs">Applied Jobs</a></li>
+                <li><a href="#/user/{{model.user._id}}/selectedjobs">Selected Jobs</a></li>
                 <li><a href="#/user/{{model.user._id}}/myconnections">My Connections</a></li>
                 <li><a href="#/user/{{model.user._id}}/view">Add Connections</a></li>
             </ul>

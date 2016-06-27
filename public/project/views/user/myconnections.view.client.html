@@ -7,12 +7,51 @@
     </div>
 </div>
 <div class="container">
+    <div ng-show="model.success" class="alert alert-success alert-dismissible" role="alert">
+        {{model.success}}
+    </div>
+    <div ng-show="model.error" class="alert alert-danger">
+        {{model.error}}
+    </div>
     <div class="row">
-        <div ng-repeat="profile in model.profileResult track by $index" class="col-xs-10">
-            <div>
-                <a ng-href="#/user/{{model.userId}}/view/{{profile.user_id}}">
-                    {{profile.name}}
-                </a>
+        <div class="font-styles font-color col-md-8 navbar-brand h2">
+            My Connections
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div ng-repeat="profile in model.profileResult track by $index" class="col-xs-12">
+            <div class="col-md-8 col-xs-10">
+                <div class="well panel panel-default">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-2 text-center">
+                                <img ng-src="{{profile.photoUrl}}" alt="" class="center-block img-circle img-thumbnail img-responsive">
+                            </div>
+                            <!--/col-->
+                            <div class="col-xs-12 col-sm-6">
+                                <a ng-href="#/user/{{model.userId}}/view/{{profile._id}}">
+                                    <h3>{{profile.firstName}} {{profile.lastName}}</h3>
+                                    </a>
+                                <!--<p><strong>Company: </strong> {{profile.company}} </p>
+                                <p><strong>Skills: </strong>
+                                    <span class="label label-info tags">{{profile.skills}}</span>
+                                </p>-->
+                            </div>
+                            <!--/col-->
+                           <!--<div class="clearfix"></div>
+                            <div class="col-xs-12 col-sm-4">
+                                <button class="btn btn-success btn-block">
+                                    <span class="fa fa-plus-circle"></span> View Profile </button></a>
+                            </div>-->
+                            <!--/col-->
+                        </div>
+                        <!--/row-->
+                    </div>
+                    <!--/panel-body-->
+                </div>
+                <!--/panel-->
             </div>
         </div>
     </div>

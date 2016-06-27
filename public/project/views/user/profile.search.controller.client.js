@@ -9,6 +9,8 @@
         vm.userId = $routeParams.userId;
         vm.searchProfile = searchProfile;
         vm.logout = logout;
+        vm.addConnection=addConnection;
+        
         function searchProfile(searchUser) {
             UserService.
                 findUserByUserName(searchUser)
@@ -34,6 +36,20 @@
                         $location.url("/login");
                     }
                 )
+        }
+
+        function addConnection(profile) {
+            var name = profile.firstName + " "+ profile.lastName;
+            UserService
+                .addConnection(vm.userId,name,profile._id)
+                .then(
+                    function(response) {
+                        vm.success = "Added to your connections";
+                    },
+                    function(error) {
+                        vm.error = "Unable to add connection"
+                    }
+                );
         }
 
     }

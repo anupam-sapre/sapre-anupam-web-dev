@@ -12,17 +12,11 @@
     </div>
     <form>
         <div class="form-group">
-            <label for="review-title">Title</label>
-            <input ng-model="title"
-                   type="text"
-                   class="form-control"
-                   id="review-title"
-                   placeholder="Title">
-        </div>
-        <div class="form-group">
             <label for="job-rating">Rating</label>
             <input ng-model="rating"
-                   type="text"
+                   type="number"
+                   min="1"
+                   max="5"
                    class="form-control"
                    id="job-rating"
                    placeholder="Rating">

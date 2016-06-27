@@ -33,22 +33,20 @@
         href="http://www.indeed.com/" title="Job Search"><img
         src="http://www.indeed.com/p/jobsearch.gif" style="border: 0;
 vertical-align: middle;" alt="Indeed job search"></a></span>
-    <div class="row">
-            <div ng-repeat="job in model.jobResult track by $index" class="col-xs-6">
-                <div>
-                    <a ng-href="#/user/{{model.userId}}/jobsearch/{{job.jobkey}}">
-                        {{job.jobtitle}}
-                    </a>
-                </div>
-                <div>
-                   {{job.company}}
-                </div>
-                <div>
-                   {{job.city}}
-                </div>
-            </div>
+    <div class="container" id="searchable-container">
+        <div class="row row-padding">
+            <div class="col-xs-4 font-styles font-color">Job Title</div>
+            <div class="col-xs-4 font-styles font-color">Location</div>
+            <div class="col-xs-4 font-styles font-color">Company</div>
+        </div>
+        <div class="row row-padding top-buffer" ng-repeat="job in model.jobResult track by $index">
+            <div class="col-xs-4"><a ng-href="#/user/{{model.userId}}/jobsearch/{{job.jobkey}}">
+                {{job.jobtitle}}
+            </a></div>
+            <div class="col-xs-4">{{job.city}}</div>
+            <div class="col-xs-4">{{job.company}}</div>
+        </div>
     </div>
-
 
 
 </div>

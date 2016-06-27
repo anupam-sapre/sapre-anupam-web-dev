@@ -10,8 +10,8 @@ module.exports = function() {
         findJobsByUserId:findJobsByUserId,
         deleteJob:deleteJob,
         findJobDescription:findJobDescription,
-        findJobsByPostedId:findJobsByPostedId
-
+        findJobsByPostedId:findJobsByPostedId,
+        findSelectedJobsByUserId:findSelectedJobsByUserId
     };
     return api;
 
@@ -39,4 +39,9 @@ module.exports = function() {
     function findJobDescription(searchInput) {
         return Job.find({snippet:  { "$regex": searchInput, "$options": "i" }});
     }
+
+    function findSelectedJobsByUserId(userId) {
+        return Job.find({selectedApplicants: userId});
+    }
+
 }

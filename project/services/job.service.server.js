@@ -4,12 +4,14 @@ module.exports = function(app,models) {
     app.post("/proj/job", createJob);
     app.get("/proj/job", findJobByJobkey);
     app.put("/proj/job",applyJob);
-    app.delete("/proj/job",deleteJob);
+    app.delete("/proj/job/:jobId",deleteJob);
     app.get("/proj/job/user/:userId",findJobsByUserId);
     app.get("/proj/job/posted/:userId",findJobsByPostedId);
     app.post("/proj/job/internal",createJobInternal);
     app.put("/proj/job/internal",deleteApplication);
     app.get("/proj/job/internal/:searchInput",findJobDescription);
+    app.put("/proj/job/selectAppli",selectApplication);
+    app.get("/proj/selectedjob/user/:userId",findSelectedJobsByUserId);
 
 
 
@@ -158,5 +160,40 @@ module.exports = function(app,models) {
                 }
             )
 
+    }
+
+    function selectApplication(req,res) {
+        var userId = req.body.userId;
+        var jobId = req.body.jobId;
+        jobModel.
+            findByJobKey(jobId)
+            .then(
+                function(job) {
+                    var appli = job.selectedApplicants;
+                    var ind = appli.indexOf(userId);
+                    if (ind == -1) {
+                        appli.push(userId);
+                        job.selectedApplicants = appli;
+                        job.save();
+                    }
+                    res.send(200);
+                },
+                function(error) {
+                    res.statusCode(404).send(error);
+                }
+            )
+    }
+
+    function findSelectedJobsByUserId(req,res) {
+        var userId = req.params.userId;
+        jobModel.findSelectedJobsByUserId(userId)
+            .then(
+                function (jobs) {
+                    res.json(jobs);
+                },
+                function (err) {
+                    res.statusCode(404).send(err);
+                }
+            )
     }
 }

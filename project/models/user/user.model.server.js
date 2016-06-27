@@ -12,7 +12,8 @@ module.exports = function() {
         findUserByUsername:findUserByUsername,
         findUserByGoogleId:findUserByGoogleId,
         findAllUsersByUsername:findAllUsersByUsername,
-        findUsersByJobkey:findUsersByJobkey
+        findUsersByJobkey:findUsersByJobkey,
+        findAllConnections:findAllConnections
     };
     return api;
 
@@ -56,6 +57,12 @@ module.exports = function() {
 
     function findUsersByJobkey(jobId) {
         return User.find({applications:jobId});
+    }
+
+    function findAllConnections(connections) {
+        return User.find({
+            '_id': { $in: connections}
+        });
     }
 
 

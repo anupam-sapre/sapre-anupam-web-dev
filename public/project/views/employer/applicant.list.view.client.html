@@ -12,8 +12,12 @@
             <a href="#/user/{{model.userId}}/view/{{profile._id}}">
                 {{profile.firstName}} {{profile.lastName}}
             </a>
+
             <a href="{{profile.resumeUrl}}" class="pull-right" download>
                 <span class="glyphicon glyphicon-download-alt"></span>
+            </a>
+            <a ng-click="model.selectApplicant(profile._id)" class="pull-right">
+                <span class="glyphicon glyphicon-ok"></span>
             </a>
             <a ng-click="model.deleteApplication(profile._id)" class="pull-right">
                 <span class="glyphicon glyphicon-remove"></span>

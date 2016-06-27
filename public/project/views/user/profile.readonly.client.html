@@ -6,31 +6,43 @@
         <a ng-click="model.logout()" class="font-color"><span class="glyphicon glyphicon-minus-sign font-color"></span> Sign Out</a>
     </div>
 </div>
-<div class="container">
-    <div class="form-group row">
-        <div ng-show="model.success" class="alert alert-success alert-dismissible" role="alert">
-            {{model.success}}
-        </div>
-        <div ng-show="model.error" class="alert alert-danger">
-            {{model.error}}
-        </div>
-        <label class="col-sm-2 form-control-label push-left">Full Name</label>
-        <label class="form-control-label col-sm-2">
-                {{model.profile.firstName}} {{model.profile.lastName}}
-        </label>
 
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-xs-10"><!--
+            <div class="well panel panel-default">
+                <div class="panel-body">-->
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-4 text-center">
+                            <img ng-src="{{model.profile.photoUrl}}" alt="" class="center-block img-circle img-thumbnail img-responsive">
+                        </div>
+                        <!--/col-->
+                        <div class="col-xs-12 col-sm-8">
+                            <h2>{{model.profile.firstName}} {{model.profile.lastName}}</h2>
+                            <p><strong>Company: </strong> {{model.profile.company}} </p>
+                            <p><strong>Email: </strong> {{model.profile.email}} </p>
+                            <p><strong>Birth Date: </strong> {{model.profile.dob |  date:'shortDate'}} </p>
+                            <p><strong>Gender: </strong> {{model.profile.gender}} </p>
+                            <p><strong>Skills: </strong>
+                                <span class="label label-info tags">{{model.profile.skills}}</span>
+                            </p>
+                        </div>
+                        <!--/col-->
+                        <div class="clearfix"></div>
+                        <div class="col-xs-12 col-sm-4">
+                            <a ng-click="model.addConnection()"><button class="btn btn-success btn-block">
+                                <span class="fa fa-plus-circle"></span> Follow </button></a>
+                        </div>
+                        <!--/col-->
+                    </div>
+                    <!--/row-->
+               <!-- </div>
+                &lt;!&ndash;/panel-body&ndash;&gt;
+            </div>-->
+            <!--/panel-->
+        </div>
+        <!--/col-->
     </div>
-    <div class="form-group row">
-        <label class="col-sm-2 form-control-label push-left">Type    </label>
-            <label class="form-control-label col-sm-3">
-                {{model.profile.accountType}}
-            </label>
-    </div>
-    <div class="form-group row">
-        <label class="col-sm-2 form-control-label push-left" for="organisation">Company </label>
-            <label class="form-control-label col-sm-3" id="organisation" >
-                {{model.profile.company}}
-            </label>
-    </div>
-    <div> <a ng-click="model.addConnection()" class="btn btn-primary">Follow!</a></div>
+    <!--/row-->
 </div>
+<!--/container-->

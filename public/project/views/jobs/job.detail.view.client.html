@@ -13,10 +13,13 @@
     <div ng-show="model.error" class="alert alert-danger">
         {{model.error}}
     </div>
-    <div>{{model.jobDetail.jobtitle}}</div>
-    <div>{{model.jobDetail.company}}</div>
-    <div>{{model.jobDetail.snippet}}</div>
-
+    <div class="row">
+    <div class="col-xs-12 col-sm-8">
+        <h4>{{model.jobDetail.jobtitle}}</h4>
+        <p><strong>Company: </strong> {{model.jobDetail.company}} </p>
+        <p><strong>Description: </strong> {{model.jobDetail.snippet}} </p>
+    </div>
+    </div>
     <div class="row">
         <div class="col-sm-3">
             <a ng-click="model.applyJob()" class="btn btn-primary">
@@ -35,21 +38,34 @@
         </div>
     </div>
     <div class="row">
-        <div ng-repeat="review in model.reviewResult track by $index" class="col-xs-6">
-            <div>
-                <a ng-href="#/user/{{model.userId}}/view/{{review.user_id}}">
-                    {{review.username}}
-                </a>
-            </div>
-            <div>
-                {{review.title}}
-            </div>
-            <div>
-                {{review.rating}}
-            </div>
-            <div>
-                {{review.review}}
-            </div>
+        <div class="col-lg-8 col-sm-8 col-xs-12">
+            <h4 id="addComment">Reviews</h4>
+            <hr>
+            <ul class="media-list comments">
+                <div ng-repeat="review in model.reviewResult track by $index">
+                    <li class="media">
+                        <div class="media-body">
+                            <h5 class="media-heading pull-left">
+                                <a ng-href="#/user/{{model.userId}}/view/{{review.user_id}}">
+                                    {{review.username}}
+                                </a></h5>
+                            <div class="comment-info pull-left">
+                                <div class="btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title=""><i class="fa fa-user"></i></div>
+                                <div class="btn btn-primary btn-xs">
+                                <ul class="list-inline ratings text-center" title="Ratings">
+                                    <div style="display:inline-block" ng-repeat="t in model.getTimes(review.rating) track by $index">
+                                        <li><span class="fa fa-star fa-lg"></span></li>
+                                    </div>
+                                </ul>
+                                    </div>
+                                <div class="btn btn-default btn-xs"><i class="fa fa-clock-o"></i> Posted on {{review.date_posted | date : 'shortDate'}}</div>
+                            </div>
+                            <br class="clearfix">
+                            <p class="well"> {{review.review}}</p>
+                        </div>
+                    </li>
+                </div>
+            </ul>
         </div>
     </div>
 </div>

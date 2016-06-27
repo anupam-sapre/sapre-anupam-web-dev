@@ -21,6 +21,7 @@ module.exports = function() {
             displayName: String
         },
         applications: [String],
+        selectedJobs:[String],
         connections:[{user_id:String,name:String}],
         dateCreated: {type: Date, default: Date.now}
     }, {collection: "project.user"});

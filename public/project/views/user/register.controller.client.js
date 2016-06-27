@@ -21,12 +21,13 @@
         }
         init();
 
-        function register(username,password,verifyPassword,email,accountType) {
+        function register(username,password,verifyPassword,email,accountType,firstName,lastName) {
             vm.userError = false;
             vm.passError = false;
             vm.verifyError = false;
             vm.emailError=false;
             vm.accountError =false;
+            vm.nameError=false;
             if(!username){
                 vm.error="Username is required";
                 vm.userError = true;
@@ -45,18 +46,15 @@
                 vm.error="Please select a Account Type";
                 vm.accountError = true;
             }
+                else if(!firstName || !lastName){
+                vm.error="Please enter complete name";
+                vm.nameError =true;
+            }
             else {
                 if (password === verifyPassword) {
-                    /*UserService
-                        .createUser(username, password,accountType,email)
-                        .then(function (response) {
-                            var user = response.data;
-                            if (user) {
-                                $location.url("/user/" + user._id);
-                            }
-                        });*/
+                   
                     UserService
-                        .register(username, password,accountType,email)
+                        .register(username, password,accountType,email,firstName,lastName)
                         .then(function (response) {
                                 var user = response.data;
                                 $rootScope.currentUser = user;

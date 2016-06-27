@@ -18,7 +18,8 @@
             addConnection:addConnection,
             findConnections:findConnections,
             findUsersByJobkey:findUsersByJobkey,
-            deleteApplication:deleteApplication
+            deleteApplication:deleteApplication,
+            selectApplicant:selectApplicant
         };
         return api;
 
@@ -58,12 +59,14 @@
             return $http.post("/proj/logout");
         }
 
-        function register(username, password,accountType,email) {
+        function register(username, password,accountType,email,firstName,lastName) {
             var user = {
                 username: username,
                 password: password,
                 accountType:accountType,
-                email:email
+                email:email,
+                firstName:firstName,
+                lastName:lastName
             };
             return $http.post("/proj/register", user);
         }
@@ -105,6 +108,15 @@
                 jobId:jobId
             }
             var url = "/proj/user/internal/"+profileId;
+            return $http.put(url,idDetails);
+        }
+
+        function selectApplicant(profileId,jobId) {
+            var idDetails = {
+                userId:profileId,
+                jobId:jobId
+            }
+            var url = "/proj/user/selectAppli/"+profileId;
             return $http.put(url,idDetails);
         }
     }

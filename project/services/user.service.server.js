@@ -23,7 +23,7 @@ module.exports = function(app,models) {
     app.put('/proj/user/conn/:userId',addConnection);
     app.get('/proj/user/conn/:userId',findConnections);
     app.put("/proj/user/internal/:profileId",deleteApplication);
-
+    app.put("/proj/user/selectAppli/:profileId",selectApplication);
     app.post ("/proj/upload", upload.single('myFile'), uploadImage);
 
     app.post ("/proj/uploadResume", upload.single('myResume'), uploadResume);
@@ -270,13 +270,12 @@ module.exports = function(app,models) {
             .then(
                 function (user) {
                     var conne = user.connections;
-                    var newProfile = {
-                        user_id:profileId,
-                        name:name
+                    if(conne.indexOf(profileId) == -1){
+                        conne.push(profileId);
+                        user.connections = conne;
+                        user.save(function () {});
                     }
-                    conne.push(newProfile);
-                    user.connections = conne;
-                    user.save(function () {});
+                    res.send(user);
                 },
                 function (error) {
                     res.statusCode(404).send(error);
@@ -290,7 +289,15 @@ module.exports = function(app,models) {
             findUserById(userId)
             .then(
                 function(user) {
-                    res.json(user.connections);
+                    projUserModel.findAllConnections(user.connections)
+                        .then(
+                            function (response) {
+                                res.json(response);
+                            },
+                            function (err) {
+                                res.statusCode(404).send(error);
+                            }
+                        )
                 },
                 function(error) {
                     res.statusCode(404).send(error);
@@ -327,6 +334,28 @@ module.exports = function(app,models) {
                     }
                     user.applications = appli;
                     user.save();
+                    res.send(200);
+                },
+                function(error) {
+                    res.statusCode(404).send(error);
+                }
+            )
+    }
+
+    function selectApplication(req,res){
+        var userId = req.body.userId;
+        var jobId = req.body.jobId;
+        projUserModel.
+            findUserById(userId)
+            .then(
+                function(user) {
+                    var appli = user.selectedJobs;
+                    var ind = appli.indexOf(jobId);
+                    if (ind == -1) {
+                        appli.push(jobId);
+                        user.selectedJobs = appli;
+                        user.save();
+                    }
                     res.send(200);
                 },
                 function(error) {

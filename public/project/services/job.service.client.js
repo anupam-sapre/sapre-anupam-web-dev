@@ -17,7 +17,9 @@
             findJobsByPostedId:findJobsByPostedId,
             deleteJob:deleteJob,
             deleteApplication:deleteApplication,
-            findJobDescription:findJobDescription
+            findJobDescription:findJobDescription,
+            selectApplicant:selectApplicant,
+            findSelectedJobsByUserId:findSelectedJobsByUserId
         };
         return api;
 
@@ -103,6 +105,20 @@
 
         function findJobDescription(text) {
             var url = "/proj/job/internal/"+text;
+            return $http.get(url);
+        }
+        
+        function selectApplicant(profileId,jobId) {
+            var idDetails = {
+                userId:profileId,
+                jobId:jobId
+            }
+            var url = "/proj/job/selectAppli";
+            return $http.put(url,idDetails);
+        }
+
+        function findSelectedJobsByUserId(userId) {
+            var url = "/proj/selectedjob/user/"+userId;
             return $http.get(url);
         }
 

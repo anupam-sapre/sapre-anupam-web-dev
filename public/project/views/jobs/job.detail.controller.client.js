@@ -9,6 +9,8 @@
         vm.userId = $routeParams.userId;
         vm.applyJob = applyJob;
         vm.logout=logout;
+        vm.getTimes=getTimes;
+        
 
 
         function init() {
@@ -99,6 +101,10 @@
                         $location.url("/login");
                     }
                 )
+        }
+
+        function getTimes(n){
+            return new Array(n);
         }
     }
 
