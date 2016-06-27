@@ -9,6 +9,8 @@
         vm.searchIndeed=searchIndeed;
         vm.logout=logout;
         vm.currUser =$rootScope.currentUser;
+        vm.searchIndeedData=searchIndeedData;
+        vm.count=0;
 
         function init() {
             var backUrl = $rootScope.currentUrl;
@@ -71,6 +73,30 @@
                         $location.url("/login");
                     }
                 )
+        }
+
+        function searchIndeedData(text,result){
+            vm.count=vm.count+15;
+            JobService.fetchip().then(
+                function (ipaddress) {
+                    var agent =navigator.userAgent;
+                    JobService.searchIndeedData(text,agent,ipaddress.data,vm.count)
+                        .then(
+                            function (res) {
+                                vm.newjobResults = res.data.results;
+                                if(result) {
+                                    vm.jobResult = result.concat(vm.newjobResults);
+                                }
+                            },
+                            function (err) {
+                                vm.error='Problem fetching information Please try after some time';
+                            }
+                        );
+                },
+                function (err) {
+                    vm.error='Problem fetching information Please try after some time';
+                }
+            );
         }
     }
 })();

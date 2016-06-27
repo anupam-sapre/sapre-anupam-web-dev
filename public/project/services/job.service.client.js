@@ -7,6 +7,7 @@
     function JobService($http,$q) {
         var api = {
             searchIndeed:searchIndeed,
+            searchIndeedData:searchIndeedData,
             findJobDetail:findJobDetail,
             fetchip:fetchip,
             applyJob:applyJob,
@@ -31,13 +32,18 @@
 
             var indeedapi = 'http://api.indeed.com/ads/apisearch?publisher='+ publisherid +
                 '&q='+ input +'&l=&format=json&sort=' +
-                '&radius=&st=&jt=&start=&limit=&fromage=&filter=&latlong=1&co=us&chnl=' +
+                '&radius=&st=&jt=&start=&limit=15&fromage=&filter=&latlong=1&co=us&chnl=' +
                 '&userip='+ipaddress.data+'&useragent='+agent+'&v=2';
             return $http.get('https://crossorigin.me/'+indeedapi);
 
+        }
+        function searchIndeedData(input,agent,ipaddress,count) {
 
-            /* var url = 'https://jobs.github.com/positions.json?description='+input+'&callback=JSON_CALLBACK';
-             return $http.jsonp(url);*/
+            var indeedapi = 'http://api.indeed.com/ads/apisearch?publisher='+ publisherid +
+                '&q='+ input +'&l=&format=json&sort=' +
+                '&radius=&st=&jt=&start='+count+'&limit=15&fromage=&filter=&latlong=1&co=us&chnl=' +
+                '&userip='+ipaddress.data+'&useragent='+agent+'&v=2';
+            return $http.get('https://crossorigin.me/'+indeedapi);
 
         }
         function findJobDetail(jobid) {
