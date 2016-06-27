@@ -15,6 +15,7 @@
                 <li><a href="#/user">Home</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
+                <li class="font-styles font-color"><a>Welcome {{model.currUser.username}}!!</a></li>
                 <li><a ng-click="model.logout()"><span class="glyphicon glyphicon-minus-sign font-color"></span>Sign Out</a></li>
             </ul>
         </div><!--/.nav-collapse -->
@@ -32,33 +33,37 @@
         <div class="col-md-8 col-xs-10"><!--
             <div class="well panel panel-default">
                 <div class="panel-body">-->
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-4 text-center">
-                            <img ng-src="{{model.profile.photoUrl}}" alt="" class="center-block img-circle img-thumbnail img-responsive">
-                        </div>
-                        <!--/col-->
-                        <div class="col-xs-12 col-sm-8">
-                            <h2>{{model.profile.firstName}} {{model.profile.lastName}}</h2>
-                            <p><strong>Company: </strong> {{model.profile.company}} </p>
-                            <p><strong>Email: </strong> {{model.profile.email}} </p>
+            <div class="row">
+                <div class="col-xs-12 col-sm-4 text-center">
+                    <img ng-src="{{model.profile.photoUrl}}" alt="" class="center-block img-circle img-thumbnail img-responsive">
+                </div>
+                <!--/col-->
+                <div class="col-xs-12 col-sm-8">
+                    <h2>{{model.profile.firstName}} {{model.profile.lastName}}</h2>
+                    <p><strong>Company: </strong> {{model.profile.company}} </p>
+                    <p><strong>Email: </strong> {{model.profile.email}} </p>
+                            <span ng-show="model.showDate">
                             <p><strong>Birth Date: </strong> {{model.profile.dob |  date:'shortDate'}} </p>
-                            <p><strong>Gender: </strong> {{model.profile.gender}} </p>
-                            <p><strong>Skills: </strong>
-                                <span class="label label-info tags">{{model.profile.skills}}</span>
-                            </p>
-                        </div>
-                        <!--/col-->
-                        <div class="clearfix"></div>
-                        <div class="col-xs-12 col-sm-4">
-                            <a ng-click="model.addConnection()"><button class="btn btn-success btn-block">
-                                <span class="fa fa-plus-circle"></span> Follow </button></a>
-                        </div>
-                        <!--/col-->
-                    </div>
-                    <!--/row-->
-               <!-- </div>
-                &lt;!&ndash;/panel-body&ndash;&gt;
-            </div>-->
+                            </span>
+                    <p><strong>Gender: </strong> {{model.profile.gender}} </p>
+                    <p><strong>Skills: </strong>
+                        <span class="label label-info tags">{{model.profile.skills}}</span>
+                    </p>
+                </div>
+                <!--/col-->
+                <div class="clearfix"></div>
+                <div class="col-xs-12 col-sm-4" ng-show="model.disableBut">
+                    <a ng-click="model.addConnection()">
+                        <button class="btn btn-success btn-block">
+                            <span class="fa fa-plus-circle"></span> Follow
+                        </button></a>
+                </div>
+                <!--/col-->
+            </div>
+            <!--/row-->
+            <!-- </div>
+             &lt;!&ndash;/panel-body&ndash;&gt;
+         </div>-->
             <!--/panel-->
         </div>
         <!--/col-->

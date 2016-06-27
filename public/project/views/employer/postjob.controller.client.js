@@ -9,7 +9,8 @@
         vm.createJob = createJob;
         vm.jobtitleerror = false;
         vm.logout=logout;
-
+        vm.currUser =$rootScope.currentUser;
+        
         function init(){
             var backUrl = $rootScope.currentUrl;
             var currUrl = "#/user/"+vm.userId+"/postedJob/new";

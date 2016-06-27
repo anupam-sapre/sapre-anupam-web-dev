@@ -9,7 +9,9 @@
         vm.jobId = $routeParams.jobid;
         vm.createReview = createReview;
         vm.reviewError = false;
+        vm.ratingError=false;
         vm.logout = logout;
+        vm.currUser =$rootScope.currentUser;
 
         function init() {
             var backUrl = $rootScope.currentUrl;
@@ -26,10 +28,11 @@
         init();
 
         function createReview(review, rating, title) {
-            vm.reviewError = false;
             if (!review) {
-                vm.reviewError = true;
                 vm.error = "Review is required";
+            }
+            else if((5 < rating || rating < 1)||(!rating)){
+                vm.error="Please Enter rating from 1 to 5";
             }
             else {
                 var newReview = {

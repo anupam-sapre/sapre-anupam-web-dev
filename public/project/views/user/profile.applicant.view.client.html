@@ -1,12 +1,38 @@
-<div class="container-fluid">
+<!--<div class="container-fluid">
     <div class="navbar-header stick-to-left">
         <a class="navbar-brand font-color font-styles" href="#/user">The Job Connector</a>
     </div>
     <div class="stick-to-right">
         <a ng-click="model.logout()" class="font-color"><span class="glyphicon glyphicon-minus-sign font-color"></span> Sign Out</a>
     </div>
-</div>
-<div class="container">
+</div>-->
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand font-styles font-color" href="#/user">The Job Connector</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav font-styles">
+                <li><a href="{{model.backUrl}}">Back</a></li>
+                <li><a href="#/user">Home</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="font-styles font-color"><a>Welcome {{model.user.username}}!!</a></li>
+                <li><a ng-click="model.logout()">
+                    <span class="glyphicon glyphicon-minus-sign font-color"></span>
+                    Sign Out
+                </a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</nav>
+<div class="container page-body">
     <div ng-show="model.success" class="alert alert-success alert-dismissible" role="alert">
         {{model.success}}
     </div>
@@ -18,18 +44,18 @@
             <h3 class="font-styles font-color">Profile</h3>
         </li>
         <li class="pull-right formdata">
-            <a href="#/user/{{model.user._id}}/view/{{model.user._id}}">
+            <a ng-click="show=!show" ng-init="enable=false;show=true;">
                 <span class="glyphicon glyphicon-eye-open"></span>
             </a>
         </li>
         <li class="pull-right formdata">
-            <a ng-click="enable=!enable" ng-init="enable=true">
+            <a ng-click="show=!show">
                 <span class="glyphicon glyphicon-edit"></span>
             </a>
         </li>
         <li class="pull-right formdata">
-            <span ng-if="!enable">
-            <a ng-click="enable=!enable;model.updateUser(model.user)" class="navbar-link">
+            <span ng-if="!show">
+            <a ng-click="model.updateUser(model.user)" class="navbar-link">
                   <span class="glyphicon glyphicon-ok">
                   </span>
             </a>
@@ -37,6 +63,7 @@
         </li>
     </ul>
 
+    <span ng-show="!show">
     <form>
         <div class="form-group row">
             <label for="email" class="col-sm-2 form-control-label push-left">Email address</label>
@@ -125,10 +152,51 @@
             </div>
         </div>
     </form>
+
+    </span>
+    <span ng-show="show">
+    <!--<div class="container page-body">-->
+    <div class="row">
+        <div class="col-md-8 col-xs-10"><!--
+            <div class="well panel panel-default">
+                <div class="panel-body">-->
+            <div class="row">
+                <div class="col-xs-12 col-sm-4 text-center">
+                    <img ng-src="{{model.user.photoUrl}}" alt="" class="center-block img-circle img-thumbnail img-responsive">
+                </div>
+                <!--/col-->
+                <div class="col-xs-12 col-sm-8">
+                    <h2>{{model.user.firstName}} {{model.user.lastName}}</h2>
+                    <p><strong>Company: </strong> {{model.user.company}} </p>
+                    <p><strong>Email: </strong> {{model.user.email}} </p>
+                    <span ng-show="model.showDate">
+                    <p><strong>Birth Date: </strong> {{model.user.dob |  date:'shortDate'}} </p>
+                    </span>
+                    <p><strong>Gender: </strong> {{model.user.gender}} </p>
+                     <div ng-switch="model.user.accountType">
+                        <div ng-switch-when="Applicant">
+                            <p><strong>Skills: </strong>
+                                <span class="label label-info tags">{{model.user.skills}}</span>
+                            </p>
+                        </div>
+                     </div>
+                </div>
+                <!--/col-->
+                <div class="clearfix"></div>
+                <div class="col-xs-12 col-sm-4 top-buffer">
+                    <a><button class="btn btn-success btn-block" disabled="true">
+                        <span class="fa fa-plus-circle"></span> Follow </button></a>
+                </div>
+                <!--/col-->
+            </div>
+        </div>
+    </div>
+
+    </span>
     <br>
     <div ng-switch="model.user.accountType">
         <div ng-switch-when="Applicant">
-            <ul class="nav nav-pills nav-justified">
+            <ul class="nav nav-pills nav-justified navbar-static-bottom">
                 <li class="active"><a href="#/user/{{model.user._id}}/jobsearch">Search Jobs</a></li>
                 <li><a href="#/user/{{model.user._id}}/myjobs">Applied Jobs</a></li>
                 <li><a href="#/user/{{model.user._id}}/selectedjobs">Selected Jobs</a></li>
@@ -137,7 +205,7 @@
             </ul>
         </div>
         <div ng-switch-when="Employer">
-            <ul class="nav nav-pills nav-justified">
+            <ul class="nav nav-pills nav-justified navbar-static-bottom">
                 <li class="active"><a href="#/user/{{model.user._id}}/postedJob/new">Post a Job</a></li>
                 <li><a href="#/user/{{model.user._id}}/postedJob">Review Applications</a></li>
                 <li><a href="#/user/{{model.user._id}}/myconnections">My Connections</a></li>

@@ -10,11 +10,15 @@
         vm.deleteApplication=deleteApplication;
         vm.logout=logout;
         vm.selectApplicant= selectApplicant;
+        vm.currUser =$rootScope.currentUser;
 
         function init() {
             UserService.findUsersByJobkey(vm.jobId)
                 .then(function (response) {
                     vm.profilelist  = response.data;
+                    if((vm.profilelist == null) || (vm.profilelist.length == 0)){
+                        vm.displayMessage = "No new applicants";
+                    }
                     var backUrl = $rootScope.currentUrl;
                     var currUrl = "#/user/"+vm.userId+"/postedJob/"+vm.jobId+"/applicants";
                     if(backUrl!=currUrl){

@@ -16,7 +16,11 @@
                 .findUserById(id)
                 .then(function(response){
                     vm.user = response.data;
+                    if(vm.user.dob){
+                        vm.showDate=true;
+                    }
                     vm.user.dob=new Date(vm.user.dob);
+
                     var backUrl = $rootScope.currentUrl;
                     var currUrl = "#/user";
                     if(backUrl!=currUrl){

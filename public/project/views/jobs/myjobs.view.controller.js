@@ -7,6 +7,7 @@
         var vm =this;
         vm.userId = $routeParams.userId;
         vm.logout=logout;
+        vm.currUser =$rootScope.currentUser;
 
         function init(){
             JobService
@@ -14,6 +15,9 @@
             (
                 function (jobResult) {
                    vm.jobResult =  jobResult.data;
+                    if((vm.jobResult == null) || (vm.jobResult.length == 0)){
+                        vm.displayMessage = "No jobs currently applied";
+                    }
                     var backUrl = $rootScope.currentUrl;
                     var currUrl = "#/user/"+vm.userId+"/myjobs";
                     if(backUrl!=currUrl){

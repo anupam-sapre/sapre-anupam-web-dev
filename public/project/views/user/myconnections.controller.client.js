@@ -7,12 +7,17 @@
         var vm =this;
         vm.userId = $routeParams.userId;
         vm.logout = logout;
+        vm.currUser =$rootScope.currentUser;
+
         function init(){
             UserService
                 .findConnections(vm.userId).then
             (
                 function (profileResult) {
                     vm.profileResult =  profileResult.data;
+                    if((vm.profileResult == null) || (vm.profileResult.length == 0)){
+                        vm.displayMessage = "You currently have no connections";
+                    }
                     var backUrl = $rootScope.currentUrl;
                     var currUrl = "#/user/"+vm.userId+"/myconnections";
                     if(backUrl!=currUrl){

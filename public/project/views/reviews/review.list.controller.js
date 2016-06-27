@@ -8,6 +8,7 @@
         vm.userId = $routeParams.userId;
         vm.jobId = $routeParams.jobid;
         vm.logout = logout;
+        vm.currUser =$rootScope.currentUser;
 
         function init() {
             ReviewService.findReviewsByUserAndJob(vm.userId, vm.jobId)

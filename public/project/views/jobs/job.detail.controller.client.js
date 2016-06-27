@@ -10,8 +10,7 @@
         vm.applyJob = applyJob;
         vm.logout=logout;
         vm.getTimes=getTimes;
-
-
+        vm.currUser =$rootScope.currentUser;
 
         function init() {
             JobService.findJobByJobkey(vm.jobid)
@@ -33,6 +32,10 @@
                                         vm.backUrl=$rootScope.backUrl;
                                         if(!vm.backUrl){
                                             vm.backUrl="#/user";
+                                        }
+                                        vm.showButtons =false;
+                                        if(vm.currUser.accountType=='Applicant'){
+                                            vm.showButtons=true;
                                         }
                                     }
                                     ,
@@ -60,6 +63,9 @@
                                         vm.backUrl=$rootScope.backUrl;
                                         if(!vm.backUrl){
                                             vm.backUrl="#/user";
+                                        }
+                                        if(vm.currUser.accountType=='Applicant'){
+                                            vm.showButtons=true;
                                         }
                                     },
                                     function (err) {

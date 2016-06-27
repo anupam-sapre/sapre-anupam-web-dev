@@ -8,11 +8,15 @@
         vm.userId = $routeParams.userId;
         vm.deleteJob=deleteJob;
         vm.logout=logout;
+        vm.currUser =$rootScope.currentUser;
 
         function init() {
             JobService.findJobsByPostedId(vm.userId)
                 .then(function (response) {
                     vm.joblist  = response.data;
+                    if((vm.joblist == null) || (vm.joblist.length == 0)){
+                        vm.displayMessage = "No posted jobs";
+                    }
                     var backUrl = $rootScope.currentUrl;
                     var currUrl = "#/user/"+vm.userId+"/postedJob";
                     if(backUrl!=currUrl){

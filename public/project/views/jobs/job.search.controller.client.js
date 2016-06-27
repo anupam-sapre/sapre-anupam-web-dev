@@ -8,6 +8,7 @@
         vm.userId = $routeParams.userId;
         vm.searchIndeed=searchIndeed;
         vm.logout=logout;
+        vm.currUser =$rootScope.currentUser;
 
         function init() {
             var backUrl = $rootScope.currentUrl;

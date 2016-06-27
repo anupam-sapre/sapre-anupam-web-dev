@@ -11,6 +11,7 @@
         vm.deleteReview = deleteReview;
         vm.updateReview = updateReview;
         vm.logout=logout;
+        vm.currUser =$rootScope.currentUser;
 
         function init() {
             ReviewService
@@ -45,18 +46,25 @@
         }
 
         function updateReview(reviewId,review){
-            review.jobkey = vm.jobId;
-            ReviewService
-                .updateReview(reviewId, review)
-                .then(
-                    function () {
-                        $location.url("/user/"+vm.userId+"/jobsearch/"+vm.jobId);
-                    },
-                    function () {
-                        vm.error = "Error while processing";
-                    }
-                );
-
+            if (!review.review) {
+                vm.error = "Review is required";
+            }
+            else if((5 < review.rating || review.rating < 1)||(!review.rating)){
+                vm.error="Please Enter rating from 1 to 5";
+            }
+            else{
+                review.jobkey = vm.jobId;
+                ReviewService
+                    .updateReview(reviewId, review)
+                    .then(
+                        function () {
+                            $location.url("/user/"+vm.userId+"/jobsearch/"+vm.jobId);
+                        },
+                        function () {
+                            vm.error = "Error while processing";
+                        }
+                    );
+            }
         }
 
         function logout() {

@@ -10,12 +10,17 @@
         vm.profileId = $routeParams.profileId;
         vm.addConnection = addConnection;
         vm.logout = logout;
+        vm.currUser =$rootScope.currentUser;
 
         function init() {
             UserService
                 .findUserById(vm.profileId)
                 .then(function(response){
+                    vm.disableBut =true;
                     vm.profile = response.data;
+                    if(vm.profile.dob){
+                        vm.showDate=true;
+                    }
                     vm.profile.dob=new Date(vm.profile.dob);
                     var backUrl = $rootScope.currentUrl;
                     var currUrl = "#/user/"+vm.userId+"/view/"+vm.profileId;
@@ -26,6 +31,9 @@
                     vm.backUrl=$rootScope.backUrl;
                     if(!vm.backUrl){
                         vm.backUrl="#/user";
+                    }
+                    if(vm.userId == vm.profileId){
+                        vm.disableBut =false;
                     }
                 });
         }
