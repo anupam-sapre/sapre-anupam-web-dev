@@ -31,8 +31,8 @@ mongoose.connect(connectionString);
 
 require("./project/app.js")(app);
 
-var ipaddress = process.env.OPENSHIFT_NODEJS_IP;
+//var ipaddress = process.env.OPENSHIFT_NODEJS_IP;
 var port      = process.env.OPENSHIFT_NODEJS_PORT || 3000;
 
 
-app.listen(port, ipaddress);
+app.listen(port);
