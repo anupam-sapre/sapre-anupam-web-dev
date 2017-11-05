@@ -30,7 +30,7 @@
 
         function searchIndeed(input,agent,ipaddress) {
 
-            var indeedapi = 'http://api.indeed.com/ads/apisearch?publisher='+ publisherid +
+            var indeedapi = 'https://api.indeed.com/ads/apisearch?publisher='+ publisherid +
                 '&q='+ input +'&l=&format=json&sort=' +
                 '&radius=&st=&jt=&start=&limit=15&fromage=&filter=&latlong=1&co=us&chnl=' +
                 '&userip='+ipaddress.data+'&useragent='+agent+'&v=2';
@@ -39,7 +39,7 @@
         }
         function searchIndeedData(input,agent,ipaddress,count) {
 
-            var indeedapi = 'http://api.indeed.com/ads/apisearch?publisher='+ publisherid +
+            var indeedapi = 'https://api.indeed.com/ads/apisearch?publisher='+ publisherid +
                 '&q='+ input +'&l=&format=json&sort=' +
                 '&radius=&st=&jt=&start='+count+'&limit=15&fromage=&filter=&latlong=1&co=us&chnl=' +
                 '&userip='+ipaddress.data+'&useragent='+agent+'&v=2';
@@ -48,7 +48,7 @@
         }
         function findJobDetail(jobid) {
 
-            var url = 'http://api.indeed.com/ads/apigetjobs?publisher='+publisherid+'&jobkeys='+jobid+'&v=2&format=json' ;
+            var url = 'https://api.indeed.com/ads/apigetjobs?publisher='+publisherid+'&jobkeys='+jobid+'&v=2&format=json' ;
             return $http.get('https://crossorigin.me/'+url);
             /*var url = 'https://jobs.github.com/positions/'+jobid+'.json?callback=JSON_CALLBACK';
             return $http.jsonp(url);*/
